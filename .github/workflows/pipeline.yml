@@ -16,12 +16,12 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
-    - name: Install Pre-Requisites for MacOS 
-        shell: bash
-        run: |
-          ./e2e.sh
+      - name: Install Pre-Requisites for MacOS 
+          shell: bash
+          run: |
+            ./e2e.sh
 
-    - name: Install Pre-Requisites for MacOS 
-        shell: bash
-        run: |
-          ./e2e_tests.sh
+      - name: Install Pre-Requisites for MacOS 
+          shell: bash
+          run: |
+            ./e2e.sh

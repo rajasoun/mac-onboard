@@ -69,16 +69,14 @@ function reportResults() {
 
 function checkOSPackages() {
     PACKAGE_LIST=($(cat packages/brew.txt))
-    PACKAGES_COUNT=$(grep '\S' packages/brew.txt  | wc -l)
     LABEL=$1
     echo -e "\n🧪 Testing $LABEL"
-    INSTALLED_COUNT=$(brew list --version $PACKAGE_LIST[@] | wc -l )
-    echo "PACKAGES_COUNT: $PACKAGES_COUNT | INSTALLED_COUNT: $INSTALLED_COUNT"
-    if [  "$PACKAGES_COUNT" = "$PACKAGES_COUNT"  ];then
-        echo -e "✅ checkOSPackages - SUCESS"
+    brew list --version $PACKAGE_LIST[@]
+    if [  $?  ];then
+        echo -e "✅ $LABEL check passed.\n"
         return 0
     else
-        echoStderr "❌ $LABEL check failed."
+        echoStderr "❌ $LABEL check failed.\n"
         FAILED+=("$LABEL")
         return 1
     fi

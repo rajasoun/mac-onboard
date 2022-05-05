@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Fail on Error
-set -euo pipefail
-IFS=$'\n\t'
+# set -euo pipefail
+# IFS=$'\n\t'
 
 NC=$'\e[0m' # No Color
 BOLD=$'\033[1m'
@@ -57,32 +57,6 @@ function upgrade_xcode(){
     fi
 }
 
-function install_brews(){
-    #brew install ${PACKAGES[@]}
-    for pkg in ${PACKAGES[@]};do 
-        pkg=$(echo $pkg | xargs)
-        if [ ! $(brew list $pkg --version) ];then 
-            echo -e "${ORANGE} Installing $pkg"
-            brew install $pkg
-        else 
-            echo -e "${ORANGE} $pkg Alreday Installed."
-        fi 
-    done
-}
-
-function install_brew_casks(){
-    #brew install --cask ${CASKS[@]} 
-    for pkg in  ${CASKS[@]} ;do 
-        pkg=$(echo $pkg | xargs)
-        if [ ! $(brew list --cask --version $pkg) ];then 
-            echo -e "${ORANGE} Installing $pkg"
-            brew install --cask $pkg
-        else 
-            echo -e "${ORANGE} $pkg Alreday Installed."
-        fi 
-    done
-}
-
 function install_visual_studio_code(){
     if [ ! -f "/usr/local/bin/code" ];then 
         echo -e "${ORANGE} Installing Visual Studio Code"
@@ -103,9 +77,9 @@ function install_sentry_cli(){
 
 function install_apps(){
     pretty_print "Installing packages..."
-    install_brews
+    brew install ${PACKAGES[@]}
     pretty_print "Installing cask(s)..."
-    install_brew_casks
+    brew install --cask ${CASKS[@]} 
     install_visual_studio_code
     install_sentry_cli
 }
@@ -147,16 +121,16 @@ function install_oh_my_zsh(){
         PLUGIN_FOLDER="$HOME/.oh-my-zsh/custom/plugins"
         git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$PLUGIN_FOLDER"/zsh-syntax-highlighting
         git clone https://github.com/zsh-users/zsh-autosuggestions "$PLUGIN_FOLDER"/zsh-autosuggestions
-        backup_copy_dotfile .zshrc 
-        backup_copy_dotfile .zprofile 
-        backup_copy_dotfile .alias.sh
-        backup_copy_dotfile .aws_vault_env.sh
     else 
         echo -e "${ORANGE} .oh-my-zsh Alreday Installed." 
         # echo -e "$HOME/.oh-my-zsh Exists. Moving to $HOME/backup"
         # rm -fr $HOME/backup/.oh-my-zsh
         # mv $HOME/.oh-my-zsh $HOME/backup 
     fi 
+    backup_copy_dotfile .zshrc 
+    backup_copy_dotfile .zprofile 
+    backup_copy_dotfile .alias.sh
+    backup_copy_dotfile .aws_vault_env.sh
 }
 
 function exit_if_not_mac_os(){
@@ -180,12 +154,13 @@ function main(){
     echo "$(date)" > dotfiles/.setup
     exit_if_not_mac_os
     install_homebrew_if_not_installed
+    upgrade_xcode
     brew_update_upgrade
     install_apps
     install_oh_my_zsh
     cleanup
     audit_trail
-    echo -e "MacOS Setup Done"
+    echo -e "${GREEN}\nMacOS Setup Done${NC}"
 }
 
 main

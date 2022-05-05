@@ -1,13 +1,17 @@
 ca-certificates
 coreutils
-curl
 gh
-httpie
 jq
 netcat
-wget
+openssl
 zsh
 zsh-autosuggestions
 zsh-syntax-highlighting
+python@3.10
+go
+httpie
+wget
+
+
 
 

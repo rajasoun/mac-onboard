@@ -300,3 +300,5 @@ aws-nuke.yml
 reports
 *bfg-report
 dotfiles/.setup
+!lib
+

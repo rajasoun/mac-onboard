@@ -21,20 +21,20 @@ export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
 export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
 
+# CURL
+export LDFLAGS="-L/usr/local/opt/curl/lib"
+export CPPFLAGS="-I/usr/local/opt/curl/include"
+
 ################################################################################################
-# rvm
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-# Created by `pipx` on 2021-04-27 17:41:52
-export PATH="$PATH:/Users/$USER/.local/bin"
-
 # Core Utils
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+
+#curl 
+export PATH="/usr/local/opt/curl/bin:$PATH"
 
 # zsh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
-
 ################################################################################################
  

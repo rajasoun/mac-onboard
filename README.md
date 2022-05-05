@@ -27,3 +27,8 @@
         ```sh
         sysctl -n machdep.cpu.brand_string
         ```
+
+1. Test Docker Setup 
+    ```sh
+    docker run --rm  hello-world
+    ```

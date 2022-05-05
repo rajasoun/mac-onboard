@@ -120,7 +120,7 @@ function install_oh_my_zsh(){
     backup_copy_dotfile .zshrc 
     backup_copy_dotfile .zprofile 
     backup_copy_dotfile .alias.sh
-    backup_copy_dotfile .aws_vault_env
+    backup_copy_dotfile .aws_vault_env.sh
 }
 
 function exit_if_not_mac_os(){

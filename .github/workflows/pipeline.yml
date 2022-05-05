@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [ main]
+
+  pull_request:
+    branches: [ main]
+
+jobs:
+  mac-setup:
+    name: Test e2e.sh 
+    runs-on: macos-latest
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+    - name: Install Pre-Requisites for MacOS Windows 
+        shell: bash
+        run: |
+          ./e2e.sh

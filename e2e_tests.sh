@@ -135,12 +135,16 @@ function reportResults() {
     if [ "${failed_results}" -ne 0 ]; then
         echoStderr -e "\n💥  Failed tests:" "${FAILED[@]}"
         EXIT_CODE="1"
-        log_sentry "$EXIT_CODE" "mac-onboard | e2e_tests.sh"
+        if [ ! -z $SENTRY_DSN ];then 
+            log_sentry "$EXIT_CODE" "mac-onboard | e2e_tests.sh"
+        fi
         exit 1
     else
         echo -e "\n💯  All passed!"
         EXIT_CODE="0"
-        log_sentry "$EXIT_CODE" "mac-onboard | e2e_tests.sh"
+        if [ ! -z $SENTRY_DSN ];then 
+            log_sentry "$EXIT_CODE" "mac-onboard | e2e_tests.sh"
+        fi
         exit 0
     fi
 }

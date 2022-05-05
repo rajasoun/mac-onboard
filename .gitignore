@@ -299,3 +299,4 @@ aws-nuke.yml
 .ops
 reports
 *bfg-report
+dotfiles/.setup

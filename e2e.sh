@@ -26,6 +26,7 @@ PACKAGES=(
     wget
     curl
     gh
+    sha2
 )
 
 CASKS=(
@@ -87,22 +88,27 @@ function install_apps(){
     curl -fsSL https://sentry.io/get-cli/ | bash
 }
 
-function cleanup(){
-    echo "Cleaning up"
-    brew cleanup
-    echo "Ask the doctor"
-    brew doctor
+function integrity(){
+	sha256sum=$(find \
+		"$HOME/.zshrc"  \
+		"$HOME/.zprofile" \
+		"$HOME/.alias.sh" \
+		"$HOME/.aws_vault_env" \
+		-type f -print0 \
+	| sort -z | xargs -r0 sha256sum | sha256sum | awk '{print $1}')
+	echo $sha256sum
 }
 
 function backup_copy_dotfile(){
     FILE=$1
-    if [ -f $FILE ];then 
+    if [ -f $HOME/$FILE ];then 
         # move to backup directory
         echo -e "${ORANGE} $FILE exists - Moving to $HOME/backup"
         mv $HOME/$FILE $HOME/backup
-    fi
-    cp dotfiles/$FILE   $HOME
-    echo -e "${GREEN} dotfiles/$FILE copied to $HOME/$FILE ${NC}"
+    fi 
+    cp dotfiles/$FILE $HOME \
+        && echo -e "${GREEN} dotfiles/$FILE copied to $HOME/$FILE ${NC}" \
+        || echo -e "${RED} dotfiles/$FILE Does Not Exists ${NC}"
 }
 
 function install_oh_my_zsh(){
@@ -114,7 +120,7 @@ function install_oh_my_zsh(){
     backup_copy_dotfile .zshrc 
     backup_copy_dotfile .zprofile 
     backup_copy_dotfile .alias.sh
-    backup_copy_dotfile aws_vault_env
+    backup_copy_dotfile .aws_vault_env
 }
 
 function exit_if_not_mac_os(){
@@ -124,13 +130,27 @@ function exit_if_not_mac_os(){
     esac
 }
 
+function cleanup(){
+    echo "Cleaning up"
+    brew cleanup
+    echo "Ask the doctor"
+    brew doctor
+}
+
+function audit_trail(){
+    echo "$(integrity)" > dotfiles/.setup
+    backup_copy_dotfile .setup
+}
+
 function main(){
+    echo "$(date)" > dotfiles/.setup
     exit_if_not_mac_os
     install_homebrew_if_not_installed
     brew_update_upgrade
     install_apps
     install_oh_my_zsh
     cleanup
+    audit_trail
     echo -e "MacOS Setup Done"
 }
 

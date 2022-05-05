@@ -21,12 +21,6 @@ export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
 export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
 
-## python3 poetry
-export PATH="$HOME/.poetry/bin:$PATH"
-
-# rust programming
-source $HOME/.cargo/env
-
 ################################################################################################
 # rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
@@ -36,6 +30,11 @@ export PATH="$PATH:/Users/$USER/.local/bin"
 
 # Core Utils
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+
+# zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 
 ################################################################################################
  

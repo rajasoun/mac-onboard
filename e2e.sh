@@ -30,7 +30,7 @@ PACKAGES=(
 
 CASKS=(
     visual-studio-code
-    iterm
+    iterm2
 )
 
 

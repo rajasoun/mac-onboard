@@ -6,8 +6,9 @@
         ```sh
         git clone https://github.com/rajasoun/mac-onboard
         cd mac-onboard
-        ./e2e.sh 
-        ./e2e_tests.sh 
+        ./assist.sh teardow # Will remove all packages
+        ./assist.sh setup
+        ./assist.sh test
         ```
 
     * On Sucess

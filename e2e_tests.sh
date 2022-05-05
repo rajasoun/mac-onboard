@@ -106,19 +106,7 @@ function checkExtension() {
 }
 
 function checkCommon(){
-    PACKAGE_LIST="ca-certificates   \
-    ca-certificates                 \
-    zsh                             \
-    zsh-autosuggestions             \ 
-    zsh-syntax-highlighting         \ 
-    aws-vault                       \
-    coreutils                       \
-    netcat                          \
-    httpie                          \
-    jq                              \
-    wget                            \
-    curl                            \
-    gh"
+    PACKAGE_LIST="$(cat packages/brew.txt)"
 
     # shellcheck disable=SC2086
     checkOSPackages "common-os-packages" ${PACKAGE_LIST}
@@ -127,7 +115,6 @@ function checkCommon(){
     check "sudo" sudo --version
     check "zsh" zsh --version
     check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]
-    check "code" code --version
 }
 
 function reportResults() {
@@ -154,8 +141,10 @@ checkCommon
 
 # Definition specific tests
 #checkExtension "ms-azuretools.vscode-docker"
-check "gh" gh --version
+check "aws-vault" aws-vault --version
+check "code" code --version
 check "sentry-cli" sentry-cli --version
+check "gh" gh --version
 check "http" http --version
 
 #check "pre-commit" pre-commit run --all-files

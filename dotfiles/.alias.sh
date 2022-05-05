@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # AWS Vault zsh shell
-alias aws-env='$HOME/.aws_vault_env.bash'
+alias aws-env='$HOME/.aws_vault_env.sh'
 
 # Mac Alias
 alias clean-mac='find . -name '.DS_Store' -type f -delete'

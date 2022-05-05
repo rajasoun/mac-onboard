@@ -13,27 +13,22 @@ BLUE=$'\e[34m'
 ORANGE=$'\x1B[33m'
 
 
-PACKAGES=(
-    ca-certificates
-    zsh
-    zsh-autosuggestions 
-    zsh-syntax-highlighting 
-    aws-vault
-    coreutils
-    netcat
-    httpie
-    jq
-    wget
-    curl
-    gh
-    sha2
-)
+PACKAGES=($(cat packages/brew.txt))
+CASKS=($(cat packages/casks.txt))
 
-CASKS=(
-    visual-studio-code
-    iterm2
-)
-
+# Displays Time in misn and seconds
+function _display_time {
+  local T=$1
+  local D=$((T / 60 / 60 / 24))
+  local H=$((T / 60 / 60 % 24))
+  local M=$((T / 60 % 60))
+  local S=$((T % 60))
+  ((D > 0)) && printf '%d days ' $D
+  ((H > 0)) && printf '%d hours ' $H
+  ((M > 0)) && printf '%d minutes ' $M
+  ((D > 0 || H > 0 || M > 0)) && printf 'and '
+  printf '%d seconds\n' $S
+}
 
 function pretty_print() {
   printf "\n%b\n" "$1"
@@ -62,10 +57,10 @@ function upgrade_xcode(){
     fi
 }
 
-function install_apps(){
-    pretty_print "Installing packages..."
+function install_brews(){
     #brew install ${PACKAGES[@]}
     for pkg in ${PACKAGES[@]};do 
+        pkg=$(echo $pkg | xargs)
         if [ ! $(brew list $pkg --version) ];then 
             echo -e "${ORANGE} Installing $pkg"
             brew install $pkg
@@ -73,22 +68,56 @@ function install_apps(){
             echo -e "${ORANGE} $pkg Alreday Installed."
         fi 
     done
-    pretty_print "Installing cask(s)..."
+}
+
+function install_brew_casks(){
     #brew install --cask ${CASKS[@]} 
     for pkg in  ${CASKS[@]} ;do 
-        if [ ! $(--version) ];then 
+        pkg=$(echo $pkg | xargs)
+        if [ ! $(brew list --cask --version $pkg) ];then 
             echo -e "${ORANGE} Installing $pkg"
             brew install --cask $pkg
         else 
             echo -e "${ORANGE} $pkg Alreday Installed."
         fi 
     done
-    brew list --casks --version
-    pretty_print "Installing Sentry CLI..."
-    curl -fsSL https://sentry.io/get-cli/ | bash
+}
+
+function install_visual_studio_code(){
+    if [ ! -f "/usr/local/bin/code" ];then 
+        echo -e "${ORANGE} Installing Visual Studio Code"
+        brew install --cask visual-studio-code
+    else 
+        echo -e "${ORANGE} Visual Studio Code Alreday Installed."
+    fi
+}
+
+function install_sentry_cli(){
+    if [ ! -f "/usr/local/bin/sentry-cli" ];then 
+        echo -e "${ORANGE} Installing Sentry CLI"
+        curl -fsSL https://sentry.io/get-cli/ | bash
+    else 
+        echo -e "${ORANGE} Sentry CLI Alreday Installed."
+    fi
+}
+
+function install_apps(){
+    pretty_print "Installing packages..."
+    install_brews
+    pretty_print "Installing cask(s)..."
+    install_brew_casks
+    install_visual_studio_code
+    install_sentry_cli
 }
 
 function integrity(){
+    pkg="sha2"
+    if [ ! $(brew list $pkg --version) ];then 
+        echo -e "${ORANGE} Installing $pkg"
+        brew install $pkg
+    else 
+        echo -e "${ORANGE} $pkg Alreday Installed."
+    fi 
 	sha256sum=$(find \
 		"$HOME/.zshrc"  \
 		"$HOME/.zprofile" \
@@ -106,21 +135,28 @@ function backup_copy_dotfile(){
         echo -e "${ORANGE} $FILE exists - Moving to $HOME/backup"
         mv $HOME/$FILE $HOME/backup
     fi 
-    cp dotfiles/$FILE $HOME \
+    cp -i dotfiles/$FILE $HOME \
         && echo -e "${GREEN} dotfiles/$FILE copied to $HOME/$FILE ${NC}" \
         || echo -e "${RED} dotfiles/$FILE Does Not Exists ${NC}"
 }
 
 function install_oh_my_zsh(){
-    sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-    PLUGIN_FOLDER="$HOME/.oh-my-zsh/custom/plugins"
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$PLUGIN_FOLDER"/zsh-syntax-highlighting
-    git clone https://github.com/zsh-users/zsh-autosuggestions "$PLUGIN_FOLDER"/zsh-autosuggestions
     mkdir -p $HOME/backup
-    backup_copy_dotfile .zshrc 
-    backup_copy_dotfile .zprofile 
-    backup_copy_dotfile .alias.sh
-    backup_copy_dotfile .aws_vault_env.sh
+    if [ ! -d "$HOME/.oh-my-zsh" ]; then 
+        curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash
+        PLUGIN_FOLDER="$HOME/.oh-my-zsh/custom/plugins"
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$PLUGIN_FOLDER"/zsh-syntax-highlighting
+        git clone https://github.com/zsh-users/zsh-autosuggestions "$PLUGIN_FOLDER"/zsh-autosuggestions
+        backup_copy_dotfile .zshrc 
+        backup_copy_dotfile .zprofile 
+        backup_copy_dotfile .alias.sh
+        backup_copy_dotfile .aws_vault_env.sh
+    else 
+        echo -e "${ORANGE} .oh-my-zsh Alreday Installed." 
+        # echo -e "$HOME/.oh-my-zsh Exists. Moving to $HOME/backup"
+        # rm -fr $HOME/backup/.oh-my-zsh
+        # mv $HOME/.oh-my-zsh $HOME/backup 
+    fi 
 }
 
 function exit_if_not_mac_os(){
@@ -136,19 +172,19 @@ function cleanup(){
 }
 
 function audit_trail(){
-    echo "$(integrity)" > dotfiles/.setup
+    echo "$(integrity)" >> dotfiles/.setup
     backup_copy_dotfile .setup
 }
 
 function main(){
-    echo "$(date)" > dotfiles/.setup
-    exit_if_not_mac_os
-    install_homebrew_if_not_installed
-    brew_update_upgrade
-    install_apps
+    # echo "$(date)" > dotfiles/.setup
+    # exit_if_not_mac_os
+    # install_homebrew_if_not_installed
+    # brew_update_upgrade
+    # install_apps
     install_oh_my_zsh
-    cleanup
-    audit_trail
+    # cleanup
+    # audit_trail
     echo -e "MacOS Setup Done"
 }
 

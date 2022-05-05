@@ -1,0 +1,13 @@
+ca-certificates
+coreutils
+curl
+gh
+httpie
+jq
+netcat
+wget
+zsh
+zsh-autosuggestions
+zsh-syntax-highlighting
+
+

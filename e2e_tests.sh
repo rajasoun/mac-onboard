@@ -63,11 +63,22 @@ function reportResults() {
     fi
 }
 
-# Run common tests
-checkCommon
+function checkOSPackages() {
+    PACKAGE_LIST=($(cat packages/brew.txt))
+    LABEL=$1
+    echo -e "\n🧪 Testing $LABEL"
+    brew list --version $PACKAGE_LIST[@]
+    if [ $? ];then
+        echo -e "✅ checkOSPackages - SUCESS"
+        return 0
+    else
+        echoStderr "❌ $LABEL check failed."
+        FAILED+=("$LABEL")
+        return 1
+    fi
+}
 
-# Definition specific tests
-#checkExtension "ms-azuretools.vscode-docker"
+checkOSPackages "common-os-packages" 
 
 check "sudo" sudo --version
 check "zsh" zsh --version

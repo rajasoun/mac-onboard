@@ -7,7 +7,7 @@
         git clone https://github.com/rajasoun/mac-onboard
         cd mac-onboard
         ./e2e.sh 
-        .e2e_tests.sh 
+        ./e2e_tests.sh 
         ```
 
     * On Sucess

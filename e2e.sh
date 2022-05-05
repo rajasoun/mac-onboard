@@ -177,14 +177,14 @@ function audit_trail(){
 }
 
 function main(){
-    # echo "$(date)" > dotfiles/.setup
-    # exit_if_not_mac_os
-    # install_homebrew_if_not_installed
-    # brew_update_upgrade
-    # install_apps
+    echo "$(date)" > dotfiles/.setup
+    exit_if_not_mac_os
+    install_homebrew_if_not_installed
+    brew_update_upgrade
+    install_apps
     install_oh_my_zsh
-    # cleanup
-    # audit_trail
+    cleanup
+    audit_trail
     echo -e "MacOS Setup Done"
 }
 

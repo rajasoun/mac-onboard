@@ -73,7 +73,8 @@ function checkOSPackages() {
     LABEL=$1
     echo -e "\n🧪 Testing $LABEL"
     INSTALLED_COUNT=$(brew list --version $PACKAGE_LIST[@] | wc -l )
-    if [ $COUNT = $PACKAGES_COUNT ];then
+    echo "PACKAGES_COUNT: $PACKAGES_COUNT | INSTALLED_COUNT: $INSTALLED_COUNT"
+    if [  "$PACKAGES_COUNT" = "$PACKAGES_COUNT"  ];then
         echo -e "✅ checkOSPackages - SUCESS"
         return 0
     else

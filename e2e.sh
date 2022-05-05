@@ -96,7 +96,7 @@ function cleanup(){
 
 function install_oh_my_zsh(){
     sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-    PLUGIN_FOLDER="/home/$USERNAME/.oh-my-zsh/custom/plugins"
+    PLUGIN_FOLDER="/home/$USER/.oh-my-zsh/custom/plugins"
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$PLUGIN_FOLDER"/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-autosuggestions "$PLUGIN_FOLDER"/zsh-autosuggestions
     cp dotfiles/.zshrc          $HOME

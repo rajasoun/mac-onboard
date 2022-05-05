@@ -94,15 +94,27 @@ function cleanup(){
     brew doctor
 }
 
+function backup_copy_dotfile(){
+    FILE=$1
+    if [ -f $FILE ];then 
+        # move to backup directory
+        echo -e "${ORANGE} $FILE exists - Moving to $HOME/backup"
+        mv $HOME/$FILE $HOME/backup
+    fi
+    cp dotfiles/$FILE   $HOME
+    echo -e "${GREEN} dotfiles/$FILE copied to $HOME/$FILE ${NC}"
+}
+
 function install_oh_my_zsh(){
     sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-    PLUGIN_FOLDER="/home/$USER/.oh-my-zsh/custom/plugins"
+    PLUGIN_FOLDER="$HOME/.oh-my-zsh/custom/plugins"
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$PLUGIN_FOLDER"/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-autosuggestions "$PLUGIN_FOLDER"/zsh-autosuggestions
-    cp dotfiles/.zshrc          $HOME
-    cp dotfiles/.zprofile       $HOME
-    cp dotfiles/.alias.sh       $HOME
-    cp dotfiles/aws_vault_env   $HOME
+    mkdir -p $HOME/backup
+    backup_copy_dotfile .zshrc 
+    backup_copy_dotfile .zprofile 
+    backup_copy_dotfile .alias.sh
+    backup_copy_dotfile aws_vault_env
 }
 
 function exit_if_not_mac_os(){

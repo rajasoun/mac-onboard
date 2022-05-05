@@ -16,12 +16,17 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
+      - name: MacOS Teardown
+        shell: bash
+        run: |
+            ./assist.sh teardown
+
       - name: MacOS Setup
         shell: bash
         run: |
-            ./e2e.sh
+            ./assist.sh setup
 
       - name: MacOS Setup - Tests
         shell: bash
         run: |
-            ./e2e_tests.sh
+            ./assist.sh test

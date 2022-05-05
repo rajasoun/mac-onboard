@@ -133,8 +133,6 @@ function exit_if_not_mac_os(){
 function cleanup(){
     echo "Cleaning up"
     brew cleanup
-    echo "Ask the doctor"
-    brew doctor
 }
 
 function audit_trail(){

@@ -4,6 +4,15 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+NC=$'\e[0m' # No Color
+BOLD=$'\033[1m'
+UNDERLINE=$'\033[4m'
+RED=$'\e[31m'
+GREEN=$'\e[32m'
+BLUE=$'\e[34m'
+ORANGE=$'\x1B[33m'
+
+
 PACKAGES=(
     ca-certificates
     zsh
@@ -79,7 +88,15 @@ function install_oh_my_zsh(){
     cp dotfiles/aws_vault_env   $HOME
 }
 
+function exit_if_not_mac_os(){
+    case "$(uname -s)" in
+    Darwin) echo -e "${GREEN}OS: Mac OS | User: $USER | Machine: $(hostname)${NC}";;
+    *)  echo -e "${RED}Non Mac OS${NC}" && exit 1;;
+    esac
+}
+
 function main(){
+    exit_if_not_mac_os
     install_homebrew_if_not_installed
     brew_update_upgrade
     install_apps

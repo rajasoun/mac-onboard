@@ -138,14 +138,14 @@ function reportResults() {
         if [ ! -z $SENTRY_DSN ];then 
             log_sentry "$EXIT_CODE" "mac-onboard | e2e_tests.sh"
         fi
-        exit 1
+        exit $EXIT_CODE
     else
         echo -e "\n💯  All passed!"
         EXIT_CODE="0"
         if [ ! -z $SENTRY_DSN ];then 
             log_sentry "$EXIT_CODE" "mac-onboard | e2e_tests.sh"
         fi
-        exit 0
+        exit $EXIT_CODE
     fi
 }
 

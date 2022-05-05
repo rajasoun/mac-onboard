@@ -8,6 +8,10 @@ if [ -z "$HOME" ]; then
     HOME="/root"
 fi
 
+function echoStderr(){
+    echo "$@" 1>&2
+}
+
 function log_sentry() {
   EXIT_CODE="$1"
   MESSAGE="$2"
@@ -65,10 +69,11 @@ function reportResults() {
 
 function checkOSPackages() {
     PACKAGE_LIST=($(cat packages/brew.txt))
+    PACKAGES_COUNT=$(grep '\S' packages/brew.txt  | wc -l)
     LABEL=$1
     echo -e "\n🧪 Testing $LABEL"
-    brew list --version $PACKAGE_LIST[@]
-    if [ $? ];then
+    INSTALLED_COUNT=$(brew list --version $PACKAGE_LIST[@] | wc -l )
+    if [ $COUNT = $PACKAGES_COUNT ];then
         echo -e "✅ checkOSPackages - SUCESS"
         return 0
     else

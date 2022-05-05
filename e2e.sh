@@ -63,9 +63,26 @@ function upgrade_xcode(){
 
 function install_apps(){
     pretty_print "Installing packages..."
-    brew install ${PACKAGES[@]}
+    #brew install ${PACKAGES[@]}
+    for pkg in ${PACKAGES[@]};do 
+        if [ ! $(brew list $pkg --version) ];then 
+            echo -e "${ORANGE} Installing $pkg"
+            brew install $pkg
+        else 
+            echo -e "${ORANGE} $pkg Alreday Installed."
+        fi 
+    done
     pretty_print "Installing cask(s)..."
-    brew install --cask ${CASKS[@]} 
+    #brew install --cask ${CASKS[@]} 
+    for pkg in  ${CASKS[@]} ;do 
+        if [ ! $(--version) ];then 
+            echo -e "${ORANGE} Installing $pkg"
+            brew install --cask $pkg
+        else 
+            echo -e "${ORANGE} $pkg Alreday Installed."
+        fi 
+    done
+    brew list --casks --version
     pretty_print "Installing Sentry CLI..."
     curl -fsSL https://sentry.io/get-cli/ | bash
 }

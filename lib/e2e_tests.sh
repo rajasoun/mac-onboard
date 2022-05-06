@@ -85,7 +85,7 @@ function e2e_test(){
 
     check "aws-vault" aws-vault --version
     check "code" code --version
-    check "sentry-cli" sentry-cli --version
+    #check "sentry-cli" sentry-cli --version
 
     check "wget" which wget
 

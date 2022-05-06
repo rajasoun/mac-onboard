@@ -55,7 +55,7 @@ function install_apps(){
     install_visual_studio_code
     pretty_print "Installing Tool(s)..."
     install_sentry_cli
-    install_sha2
+    install_pkg "sha2"
 }
 
 function install_pkg(){

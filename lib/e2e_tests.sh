@@ -54,22 +54,40 @@ function checkOSPackages() {
     fi
 }
 
+function check_vs_extensions(){
+    pkg=${1:-ms-vscode-remote.remote-containers}
+    extensions=$(code --list-extensions | grep -c "$pkg" )
+    if [[ $extensions = 1 ]]; then
+        echo "✅  Visual Studio Code Extension : $pkg Passed!"
+        return 0
+    else
+        echoStderr "❌ Visual Studio Code Extension : $pkg check failed.\n"
+        FAILED+=("$LABEL")
+        return 1
+    fi
+}
+
 function e2e_test(){
     checkOSPackages "common-os-packages"
-    check "sudo" sudo --version
-    check "zsh" zsh --version
+
+    check_vs_extensions "ms-vscode-remote.remote-containers"
+    check_vs_extensions "golang.go"
+
+    check "sudo" sudo --version | head -1
     check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]
-    check "curl" curl --version
-    check "wget" wget --version
+    check "zsh" zsh --version
+    check "curl" curl --version | head -1
+    check "netcat" netcat --version | head -1
 
     check "gh" gh --version
     check "http" http --version
     check "jq" jq --version
-    check "netcat" netcat --version
 
     check "aws-vault" aws-vault --version
     check "code" code --version
     check "sentry-cli" sentry-cli --version
+
+    check "wget" which wget
 
     #check "pre-commit" pre-commit run --all-files
     # Report result

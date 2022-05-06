@@ -158,10 +158,10 @@ function setup_main(){
     EXIT_CODE="$?"
     end=$(date +%s)
     runtime=$((end-start))
-    log "$EXIT_CODE" "$MESSAGE"
-    echo -e "${BOLD}\nSpeed Test\n${NC}"
-    docker run --rm rajasoun/speedtest:0.1.0 "/go/bin/speedtest-go"
     MESSAGE="Mac Onboarding | $USER | Duration: $(_display_time $runtime) "
+    log "$EXIT_CODE" "$MESSAGE"
+    #echo -e "${BOLD}\nSpeed Test\n${NC}"
+    #docker run --rm rajasoun/speedtest:0.1.0 "/go/bin/speedtest-go"
 }
 
 # Ignore main when sourced

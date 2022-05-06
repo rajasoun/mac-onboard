@@ -15,26 +15,29 @@ export LANG=en_US.UTF-8
 export AWS_VAULT_BACKEND=file
 
 # OpenSSL
-export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
-export DYLD_LIBRARY_PATH="/usr/local/Cellar/openssl@1.1/1.1.1g/lib:$DYLD_LIBRARY_PATH"
-export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
-export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
-export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
+export LDFLAGS="-L/usr/local/opt/openssl@3/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl@3/include"
 
 # CURL
 export LDFLAGS="-L/usr/local/opt/curl/lib"
 export CPPFLAGS="-I/usr/local/opt/curl/include"
 
+# python@3.10
+export LDFLAGS="-L/usr/local/opt/python@3.10/lib"
+
+# zsh-autosuggestions & zsh-syntax-highlighting
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
+
 ################################################################################################
+#openssl@3
+export PATH="/usr/local/opt/openssl@3/bin:$PATH"
+
 # Core Utils
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 
-#curl 
+# curl
 export PATH="/usr/local/opt/curl/bin:$PATH"
 
-# zsh
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
+# python@3.10
+export PATH="/usr/local/opt/python@3.10/bin:$HOME/Library/Python/3.10/bin:$PATH"
 ################################################################################################
- 

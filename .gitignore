@@ -301,4 +301,4 @@ reports
 *bfg-report
 dotfiles/.setup
 !lib
-
+log.txt

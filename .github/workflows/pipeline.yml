@@ -9,7 +9,7 @@ on:
 
 jobs:
   mac-setup:
-    name: Test e2e.sh 
+    name: Test e2e.sh
     runs-on: macos-latest
 
     steps:

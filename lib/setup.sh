@@ -110,6 +110,11 @@ function install_oh_my_zsh(){
     backup_copy_dotfile .aws_vault_env.sh
 }
 
+function install_global_node_packages(){
+    NODE_PACKAGES=($(cat packages/node_packages.txt))
+    npm install -g ${NODE_PACKAGES[@]}
+}
+
 function exit_if_not_mac_os(){
     case "$(uname -s)" in
     Darwin) echo -e "${GREEN}OS: Mac OS | User: $USER | Machine: $(hostname)${NC}";;
@@ -152,6 +157,7 @@ function setup(){
     brew_update_upgrade
     install_apps
     install_oh_my_zsh
+    install_global_node_packages
     cleanup
     audit_trail
 }

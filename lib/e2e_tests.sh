@@ -87,6 +87,7 @@ function e2e_test(){
     #check "sentry-cli" sentry-cli --version
 
     check "wget" which wget
+    check "devcontainer" which devcontainer
 
     #check "pre-commit" pre-commit run --all-files
     # Report result

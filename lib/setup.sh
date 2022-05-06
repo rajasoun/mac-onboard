@@ -124,18 +124,24 @@ function cleanup(){
 
 function audit_trail(){
     echo "Dot Files Intgerity: $(integrity)" >> dotfiles/.setup
-    brew_integrity=$(brew list --version $PACKAGE_LIST[@] | sha256sum | awk '{print $1}')
+    brew_integrity=$(brew list --version | sha256sum | awk '{print $1}')
     echo "Installed Packages Integrity: $brew_integrity" >> dotfiles/.setup
+    brew list > packages/installed.txt
     backup_copy_dotfile .setup
 }
 
 function check_integrity(){
-    if cmp -s "${PWD}/dotfiles/.setup" "$HOME/.setup"; then
+    brew_integrity=$(brew list --version | sha256sum | awk '{print $1}')
+    if [ $(cat "${HOME}/.setup" | grep -c $brew_integrity) = 1 ];then 
         echo -e "${GREEN}Integrity Check - Passsed${NC}\n"
-		return 0
+        return 0
     else
         echo -e "${RED}Integrity Check - Failed${NC}\n"
-		return 1
+        echo -e "${ORGANGE}Installation found outside of Automation${NC}\n"
+        to_be=$(cat ${PWD}/packages/installed.txt)
+        current=$(brew list)
+        diff <( echo $to_be ) <( echo $current )
+        return 1
     fi
 }
 

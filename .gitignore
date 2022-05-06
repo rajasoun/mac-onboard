@@ -302,3 +302,4 @@ reports
 dotfiles/.setup
 !lib
 log.txt
+packages/installed.txt

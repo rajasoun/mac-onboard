@@ -149,8 +149,9 @@ function setup(){
 }
 
 function setup_main(){
+    echo "In Setup Main"
     start=$(date +%s)
-    echo "Action: Setup | Start Time: $start" > dotfiles/.setup
+    echo "Action: Setup | Start Time: $(date)" > dotfiles/.setup
     setup
     EXIT_CODE="$?"
     end=$(date +%s)

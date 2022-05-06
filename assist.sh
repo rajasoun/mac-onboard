@@ -5,10 +5,12 @@
 # IFS=$'\n\t'
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 source "$SCRIPT_DIR/lib/display.sh"
+source "$SCRIPT_DIR/lib/teardown.sh"
 source "$SCRIPT_DIR/lib/setup.sh"
 source "$SCRIPT_DIR/lib/e2e_tests.sh"
-source "$SCRIPT_DIR/lib/teardown.sh"
+
 
 opt="$1"
 choice=$( tr '[:upper:]' '[:lower:]' <<<"$opt" )

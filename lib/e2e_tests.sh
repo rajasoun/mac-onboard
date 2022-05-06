@@ -6,32 +6,6 @@ if [ -z "$HOME" ]; then
     HOME="/root"
 fi
 
-function echoStderr(){
-    echo "$@" 1>&2
-}
-
-function log_sentry() {
-  EXIT_CODE="$1"
-  MESSAGE="$2"
-  GIT_VERSION=$(git describe --tags --always --dirty)
-  GIT_USER=$(git config user.name)
-
-  # Set OS username if GIT_USER is empty
-  [ -z "$GIT_USER" ] && GIT_USER=$USER
-
-  if [[ -n "$EXIT_CODE" && "$EXIT_CODE" -eq 0 ]]; then
-    echo -e "$MESSAGE | Success ✅"
-    sentry-cli send-event --message "✅ $MESSAGE | $GIT_USER | Success " --tag version:"$GIT_VERSION" --user user:"$GIT_USER" --level info
-  else
-    echo -e "$MESSAGE | Failed ❌"
-    sentry-cli send-event --message "❌ $MESSAGE | $GIT_USER | Failed " --tag version:"$GIT_VERSION" --user user:"$GIT_USER" --level error
-  fi
-}
-
-function echoStderr(){
-    echo "$@" 1>&2
-}
-
 function check() {
     LABEL=$1
     shift
@@ -80,7 +54,7 @@ function checkOSPackages() {
     fi
 }
 
-function test(){
+function e2e_test(){
     checkOSPackages "common-os-packages" 
     check "sudo" sudo --version
     check "zsh" zsh --version
@@ -104,8 +78,8 @@ function test(){
 
 function e2e_tests_main(){
     start=$(date +%s)
-    echo "Action: Test | Start Time: $start" > dotfiles/.setup
-    test
+    echo "Action: Test | Start Time: $(date)" > dotfiles/.setup
+    e2e_test
     EXIT_CODE="$?"
     end=$(date +%s)
     runtime=$((end-start))

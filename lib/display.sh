@@ -36,3 +36,26 @@ function log(){
 function pretty_print() {
   printf "\n%b\n" "$1"
 }
+
+function echoStderr(){
+    echo "$@" 1>&2
+}
+
+function log_sentry() {
+  EXIT_CODE="$1"
+  MESSAGE="$2"
+  GIT_VERSION=$(git describe --tags --always --dirty)
+  GIT_USER=$(git config user.name)
+
+  # Set OS username if GIT_USER is empty
+  [ -z "$GIT_USER" ] && GIT_USER=$USER
+
+  if [[ -n "$EXIT_CODE" && "$EXIT_CODE" -eq 0 ]]; then
+    echo -e "$MESSAGE | Success ✅"
+    sentry-cli send-event --message "✅ $MESSAGE | $GIT_USER | Success " --tag version:"$GIT_VERSION" --user user:"$GIT_USER" --level info
+  else
+    echo -e "$MESSAGE | Failed ❌"
+    sentry-cli send-event --message "❌ $MESSAGE | $GIT_USER | Failed " --tag version:"$GIT_VERSION" --user user:"$GIT_USER" --level error
+  fi
+}
+

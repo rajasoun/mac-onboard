@@ -71,7 +71,6 @@ function e2e_test(){
     checkOSPackages "common-os-packages"
 
     check_vs_extensions "ms-vscode-remote.remote-containers"
-    check_vs_extensions "golang.go"
 
     check "sudo" sudo --version | head -1
     check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]

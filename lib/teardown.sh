@@ -76,7 +76,7 @@ function teardown(){
 
 function teardown_main(){
     start=$(date +%s)
-    echo "Action: Teardown | Start Time: $(date)" > dotfiles/.setup
+    #echo "Action: Teardown | Start Time: $(date)" >> dotfiles/.setup
     teardown
     EXIT_CODE="$?"
     end=$(date +%s)

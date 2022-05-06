@@ -35,10 +35,9 @@ export PATH="/usr/local/opt/openssl@3/bin:$PATH"
 # Core Utils
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 
-# curl 
+# curl
 export PATH="/usr/local/opt/curl/bin:$PATH"
 
 # python@3.10
-export PATH="/usr/local/opt/python@3.10/bin:$PATH"
+export PATH="/usr/local/opt/python@3.10/bin:$HOME/Library/Python/3.10/bin:$PATH"
 ################################################################################################
- 

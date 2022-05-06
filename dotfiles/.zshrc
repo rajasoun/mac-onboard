@@ -10,28 +10,28 @@ timezsh() {
 
 ## Time Plugins
 timeplugins() {
-  # Load all of the plugins that were defined in ~/.zshrc  
+  # Load all of the plugins that were defined in ~/.zshrc
   for plugin ($plugins); do
     timer=$(($(gdate +%s%N)/1000000))
-    if [ -f $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh ]; then  
-      source $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh  
-    elif [ -f $ZSH/plugins/$plugin/$plugin.plugin.zsh ]; then  
-      source $ZSH/plugins/$plugin/$plugin.plugin.zsh  
-    fi  
+    if [ -f $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh ]; then
+      source $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh
+    elif [ -f $ZSH/plugins/$plugin/$plugin.plugin.zsh ]; then
+      source $ZSH/plugins/$plugin/$plugin.plugin.zsh
+    fi
     now=$(($(gdate +%s%N)/1000000))
-    elapsed=$(($now-$timer))  
-    echo $elapsed":" $plugin  
-  done 
+    elapsed=$(($now-$timer))
+    echo $elapsed":" $plugin
+  done
 }
 
 ## Check & source file
 function source_file(){
   file=$1
-  if [ -f "$file" ];then 
+  if [ -f "$file" ];then
       source $file
-  else 
+  else
       echo -e "Error sourcing $file. Check $HOME/.zprofile"
-  fi 
+  fi
 }
 ###################################################################
 
@@ -43,14 +43,14 @@ function source_file(){
 # DISABLE_CORRECTION="true"
 # source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 
-## oh-my-zsh 
+## oh-my-zsh
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_THEME="robbyrussell"
 
 plugins=(
-  git 
-  zsh-syntax-highlighting 
-  zsh-autosuggestions 
+  git
+  zsh-syntax-highlighting
+  zsh-autosuggestions
 )
 
 # source files

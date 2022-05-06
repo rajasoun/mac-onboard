@@ -18,10 +18,10 @@ alias dclean_all='curl -fsSL https://git.io/Jn13Q | sh'
 # SSH Keygen
 alias ssh_keygen='ssh-keygen -q -t rsa -N '' -f "$HOME/.ssh/id_rsa" -C "$USERNAME@cisco.com" <<<y 2>&1 >/dev/null'
 
-# Git Rename master to main 
+# Git Rename master to main
 alias git_m2m='git branch -M main && git push -u origin main'
 
-# Find port 
+# Find port
 lsof_port() {
     # exits if command-line parameter absent
     : "${1?"Usage: lsof_port <port_number>"}"
@@ -40,12 +40,12 @@ docker_image_history(){
 }
 
 # Remove no non-running containers
-dclean(){ 
+dclean(){
     # Exit if there are no non-running containers
     if [[ $(docker ps --filter "status=exited" | wc -l) -eq '1' ]]; then
-        echo "Nothing to Clean. Zero non-running containers !!!"  
+        echo "Nothing to Clean. Zero non-running containers !!!"
         return 0 2> /dev/null || exit 0
-    fi 
+    fi
     echo "Removing all non-running containers"
     docker ps --filter "status=exited"
     # docker ps --filter "status=exited" | awk '{print $1}' | tail -n +2 | xargs  docker rm
@@ -56,5 +56,3 @@ dclean(){
 gclean(){
     git gc --aggressive --prune=all
 }
-
-

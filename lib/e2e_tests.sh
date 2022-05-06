@@ -25,14 +25,14 @@ function reportResults() {
     if [ "${failed_results}" -ne 0 ]; then
         echoStderr -e "\n💥  Failed tests:" "${FAILED[@]}"
         EXIT_CODE="1"
-        if [ ! -z $SENTRY_DSN ];then 
+        if [ ! -z $SENTRY_DSN ];then
             log_sentry "$EXIT_CODE" "mac-onboard | e2e_tests.sh"
         fi
         exit $EXIT_CODE
     else
         echo -e "\n💯  All passed!"
         EXIT_CODE="0"
-        if [ ! -z $SENTRY_DSN ];then 
+        if [ ! -z $SENTRY_DSN ];then
             log_sentry "$EXIT_CODE" "mac-onboard | e2e_tests.sh"
         fi
         exit $EXIT_CODE
@@ -55,7 +55,7 @@ function checkOSPackages() {
 }
 
 function e2e_test(){
-    checkOSPackages "common-os-packages" 
+    checkOSPackages "common-os-packages"
     check "sudo" sudo --version
     check "zsh" zsh --version
     check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]
@@ -89,7 +89,7 @@ function e2e_tests_main(){
 
 # Ignore main when sourced
 [[ $0 != "$BASH_SOURCE" ]] && sourced=1 || sourced=0
-if [ $sourced = 0 ];then 
+if [ $sourced = 0 ];then
     echo -e "Executing $0 "
     e2e_tests_main
 fi

@@ -77,7 +77,7 @@ function teardown_main(){
 
 # Ignore main when sourced
 [[ $0 != "$BASH_SOURCE" ]] && sourced=1 || sourced=0
-if [ $sourced = 0 ];then 
+if [ $sourced = 0 ];then
     echo -e "Executing $0 "
     teardown_main
 fi

@@ -1,2 +1,2 @@
-aws-vault 
+aws-vault
 iterm2

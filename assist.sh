@@ -26,7 +26,7 @@ cat <<-EOF
 Commands:
 ---------
   setup       -> Setup Mac
-  test        -> Run Automated Test 
+  test        -> Run Automated Test
   teardown    -> Teardown Dev Container
 EOF
     ;;

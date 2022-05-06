@@ -58,4 +58,3 @@ function log_sentry() {
     sentry-cli send-event --message "❌ $MESSAGE | $GIT_USER | Failed " --tag version:"$GIT_VERSION" --user user:"$GIT_USER" --level error
   fi
 }
-

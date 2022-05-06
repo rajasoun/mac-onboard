@@ -28,19 +28,19 @@ function upgrade_xcode(){
 }
 
 function install_visual_studio_code(){
-    if [ ! -f "/usr/local/bin/code" ];then 
+    if [ ! -f "/usr/local/bin/code" ];then
         echo -e "${ORANGE} Installing Visual Studio Code"
         brew install --cask visual-studio-code
-    else 
+    else
         echo -e "${ORANGE} Visual Studio Code Alreday Installed."
     fi
 }
 
 function install_sentry_cli(){
-    if [ ! -f "/usr/local/bin/sentry-cli" ];then 
+    if [ ! -f "/usr/local/bin/sentry-cli" ];then
         echo -e "${ORANGE} Installing Sentry CLI"
         curl -fsSL https://sentry.io/get-cli/ | bash
-    else 
+    else
         echo -e "${ORANGE} Sentry CLI Alreday Installed."
     fi
 }
@@ -49,7 +49,7 @@ function install_apps(){
     pretty_print "Installing Package(s)..."
     brew install ${PACKAGES[@]}
     pretty_print "Installing Cask(s)..."
-    brew install --cask ${CASKS[@]} 
+    brew install --cask ${CASKS[@]}
     install_visual_studio_code
     pretty_print "Installing Tool(s)..."
     install_sentry_cli
@@ -58,12 +58,12 @@ function install_apps(){
 
 function install_sha2(){
     pkg="sha2"
-    if [ ! $(brew list $pkg --version) ];then 
+    if [ ! $(brew list $pkg --version) ];then
         echo -e "${ORANGE} Installing $pkg"
         brew install $pkg
-    else 
+    else
         echo -e "${ORANGE} $pkg Alreday Installed."
-    fi 
+    fi
 }
 
 function integrity(){
@@ -79,11 +79,11 @@ function integrity(){
 
 function backup_copy_dotfile(){
     FILE=$1
-    if [ -f $HOME/$FILE ];then 
+    if [ -f $HOME/$FILE ];then
         # move to backup directory
         echo -e "${ORANGE} $FILE exists - Moving to $HOME/backup"
         mv $HOME/$FILE $HOME/backup
-    fi 
+    fi
     cp -i dotfiles/$FILE $HOME \
         && echo -e "${GREEN} dotfiles/$FILE copied to $HOME/$FILE ${NC}" \
         || echo -e "${RED} dotfiles/$FILE Does Not Exists ${NC}"
@@ -91,19 +91,19 @@ function backup_copy_dotfile(){
 
 function install_oh_my_zsh(){
     mkdir -p $HOME/backup
-    if [ ! -d "$HOME/.oh-my-zsh" ]; then 
+    if [ ! -d "$HOME/.oh-my-zsh" ]; then
         curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash
         PLUGIN_FOLDER="$HOME/.oh-my-zsh/custom/plugins"
         git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$PLUGIN_FOLDER"/zsh-syntax-highlighting
         git clone https://github.com/zsh-users/zsh-autosuggestions "$PLUGIN_FOLDER"/zsh-autosuggestions
-    else 
-        echo -e "${ORANGE} .oh-my-zsh Alreday Installed." 
+    else
+        echo -e "${ORANGE} .oh-my-zsh Alreday Installed."
         # echo -e "$HOME/.oh-my-zsh Exists. Moving to $HOME/backup"
         # rm -fr $HOME/backup/.oh-my-zsh
-        # mv $HOME/.oh-my-zsh $HOME/backup 
-    fi 
-    backup_copy_dotfile .zshrc 
-    backup_copy_dotfile .zprofile 
+        # mv $HOME/.oh-my-zsh $HOME/backup
+    fi
+    backup_copy_dotfile .zshrc
+    backup_copy_dotfile .zprofile
     backup_copy_dotfile .alias.sh
     backup_copy_dotfile .aws_vault_env.sh
 }
@@ -162,8 +162,7 @@ function setup_main(){
 
 # Ignore main when sourced
 [[ $0 != "$BASH_SOURCE" ]] && sourced=1 || sourced=0
-if [ $sourced = 0 ];then 
+if [ $sourced = 0 ];then
     echo -e "Executing $0 "
     setup_main
 fi
-

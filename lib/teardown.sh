@@ -7,7 +7,7 @@ function teardown(){
     rm -fr $HOME/.oh-my-zsh
     rm -fr  /usr/local/share/zsh-autosuggestions
     rm -fr  /usr/local/share/zsh-syntax-highlighting
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 }
 
 function teardown_main(){

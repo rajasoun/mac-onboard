@@ -1,5 +1,8 @@
 #!/usr/bin/env sh
 
+# Edit ohmyzsh
+alias ohmyzsh="code ~/.oh-my-zsh"
+
 # AWS Vault zsh shell
 alias aws-env='$HOME/.aws_vault_env.sh'
 

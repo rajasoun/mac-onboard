@@ -26,8 +26,6 @@ export CPPFLAGS="-I/usr/local/opt/curl/include"
 export LDFLAGS="-L/usr/local/opt/python@3.10/lib"
 
 # zsh-autosuggestions & zsh-syntax-highlighting
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 
 ################################################################################################

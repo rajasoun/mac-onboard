@@ -28,6 +28,7 @@ Commands:
   setup       -> Setup Mac
   test        -> Run Automated Test
   teardown    -> Teardown Dev Container
+  check       -> Check Integrity of the automated setup
 EOF
     ;;
 esac

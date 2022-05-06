@@ -11,3 +11,4 @@ python@3.10
 go
 httpie
 wget
+node

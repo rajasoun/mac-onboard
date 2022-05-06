@@ -73,7 +73,7 @@ function integrity(){
 		"$HOME/.zshrc"  \
 		"$HOME/.zprofile" \
 		"$HOME/.alias.sh" \
-		"$HOME/.aws_vault_env" \
+		"$HOME/.aws_vault_env.sh" \
 		-type f -print0 \
 	| sort -z | xargs -r0 sha256sum | sha256sum | awk '{print $1}')
 	echo $sha256sum
@@ -158,8 +158,10 @@ function setup_main(){
     EXIT_CODE="$?"
     end=$(date +%s)
     runtime=$((end-start))
-    MESSAGE="Mac Onboarding | $USER | Duration: $(_display_time $runtime) "
     log "$EXIT_CODE" "$MESSAGE"
+    echo -e "${BOLD}\nSpeed Test\n${NC}"
+    docker run --rm rajasoun/speedtest:0.1.0 "/go/bin/speedtest-go"
+    MESSAGE="Mac Onboarding | $USER | Duration: $(_display_time $runtime) "
 }
 
 # Ignore main when sourced

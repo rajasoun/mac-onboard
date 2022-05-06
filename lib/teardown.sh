@@ -47,7 +47,11 @@ function uninstall_visual_studio_code_on_mac(){
 }
 
 function uninstall_visual_studio_code_extension(){
-    code --list-extensions | xargs -L 1 code --uninstall-extension
+    if command -v code >/dev/null 2>&1; then
+        code --list-extensions | xargs -L 1 code --uninstall-extension
+    else
+        echo -e "Visual Studio Code Extension Already Removed"
+    fi
 }
 
 function uninstall_apps(){

@@ -1,38 +1,8 @@
 #!/usr/bin/env bash
 
-# Fail on Error
-# set -euo pipefail
-# IFS=$'\n\t'
-
-NC=$'\e[0m' # No Color
-BOLD=$'\033[1m'
-UNDERLINE=$'\033[4m'
-RED=$'\e[31m'
-GREEN=$'\e[32m'
-BLUE=$'\e[34m'
-ORANGE=$'\x1B[33m'
-
 
 PACKAGES=($(cat packages/brew.txt))
 CASKS=($(cat packages/casks.txt))
-
-# Displays Time in misn and seconds
-function _display_time {
-  local T=$1
-  local D=$((T / 60 / 60 / 24))
-  local H=$((T / 60 / 60 % 24))
-  local M=$((T / 60 % 60))
-  local S=$((T % 60))
-  ((D > 0)) && printf '%d days ' $D
-  ((H > 0)) && printf '%d hours ' $H
-  ((M > 0)) && printf '%d minutes ' $M
-  ((D > 0 || H > 0 || M > 0)) && printf 'and '
-  printf '%d seconds\n' $S
-}
-
-function pretty_print() {
-  printf "\n%b\n" "$1"
-}
 
 function install_homebrew_if_not_installed(){
     # Check for Homebrew, install if not installed
@@ -76,15 +46,17 @@ function install_sentry_cli(){
 }
 
 function install_apps(){
-    pretty_print "Installing packages..."
+    pretty_print "Installing Package(s)..."
     brew install ${PACKAGES[@]}
-    pretty_print "Installing cask(s)..."
+    pretty_print "Installing Cask(s)..."
     brew install --cask ${CASKS[@]} 
     install_visual_studio_code
+    pretty_print "Installing Tool(s)..."
     install_sentry_cli
+    install_sha2
 }
 
-function integrity(){
+function install_sha2(){
     pkg="sha2"
     if [ ! $(brew list $pkg --version) ];then 
         echo -e "${ORANGE} Installing $pkg"
@@ -92,6 +64,9 @@ function integrity(){
     else 
         echo -e "${ORANGE} $pkg Alreday Installed."
     fi 
+}
+
+function integrity(){
 	sha256sum=$(find \
 		"$HOME/.zshrc"  \
 		"$HOME/.zprofile" \
@@ -146,12 +121,23 @@ function cleanup(){
 }
 
 function audit_trail(){
-    echo "$(integrity)" >> dotfiles/.setup
+    echo "Dot Files Intgerity: $(integrity)" >> dotfiles/.setup
+    brew_integrity=$(brew list --version $PACKAGE_LIST[@] | sha256sum | awk '{print $1}')
+    echo "Installed Packages Integrity: $brew_integrity" >> dotfiles/.setup
     backup_copy_dotfile .setup
 }
 
-function main(){
-    echo "$(date)" > dotfiles/.setup
+function check_integrity(){
+    if cmp -s "${PWD}/dotfiles/.setup" "$HOME/.setup"; then
+        echo -e "${GREEN}Integrity Check - Passsed${NC}\n"
+		return 0
+    else
+        echo -e "${RED}Integrity Check - Failed${NC}\n"
+		return 1
+    fi
+}
+
+function setup(){
     exit_if_not_mac_os
     install_homebrew_if_not_installed
     upgrade_xcode
@@ -160,8 +146,23 @@ function main(){
     install_oh_my_zsh
     cleanup
     audit_trail
-    echo -e "${GREEN}\nMacOS Setup Done${NC}"
 }
 
-main
+function setup_main(){
+    start=$(date +%s)
+    echo "$start" > dotfiles/.setup
+    setup
+    EXIT_CODE="$?"
+    end=$(date +%s)
+    runtime=$((end-start))
+    MESSAGE="Mac Onboarding | $USER | Duration: $(_display_time $runtime) "
+    log "$EXIT_CODE" "$MESSAGE"
+}
+
+# Ignore main when sourced
+[[ $0 != "$BASH_SOURCE" ]] && sourced=1 || sourced=0
+if [ $sourced = 0 ];then 
+    echo -e "Executing $0 "
+    setup_main
+fi
 

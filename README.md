@@ -6,7 +6,7 @@
         ```sh
         git clone https://github.com/rajasoun/mac-onboard
         cd mac-onboard
-        ./assist.sh teardow # Will remove all packages
+        ./assist.sh teardown # Will remove all packages
         ./assist.sh setup
         ./assist.sh test
         ```
@@ -34,3 +34,15 @@
     docker run --rm  hello-world
     ```
 
+## Debugging 
+
+> Ensure No Credntials Gets Typed 
+
+Execute using `script` command and share the log.txt
+
+```sh 
+script log.txt ./assist.sh teardown
+script log.txt ./assist.sh setup
+script log.txt ./assist.sh test
+script log.txt ./assist.sh check
+```

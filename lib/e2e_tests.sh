@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
 FAILED=()
 
 if [ -z "$HOME" ]; then
@@ -82,24 +80,42 @@ function checkOSPackages() {
     fi
 }
 
-checkOSPackages "common-os-packages" 
+function test(){
+    checkOSPackages "common-os-packages" 
+    check "sudo" sudo --version
+    check "zsh" zsh --version
+    check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]
+    check "curl" curl --version
+    check "wget" wget --version
 
-check "sudo" sudo --version
-check "zsh" zsh --version
-check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]
-check "curl" curl --version
-check "wget" wget --version
+    check "gh" gh --version
+    check "http" http --version
+    check "jq" jq --version
+    check "netcat" netcat --version
 
-check "gh" gh --version
-check "http" http --version
-check "jq" jq --version
-check "netcat" netcat --version
+    check "aws-vault" aws-vault --version
+    check "code" code --version
+    check "sentry-cli" sentry-cli --version
 
-check "aws-vault" aws-vault --version
-check "code" code --version
-check "sentry-cli" sentry-cli --version
+    #check "pre-commit" pre-commit run --all-files
+    # Report result
+    reportResults
+}
 
-#check "pre-commit" pre-commit run --all-files
-# Report result
-reportResults
+function e2e_tests_main(){
+    start=$(date +%s)
+    echo "$start" > dotfiles/.setup
+    test
+    EXIT_CODE="$?"
+    end=$(date +%s)
+    runtime=$((end-start))
+    MESSAGE="Mac Onboarding e2e Test | $USER | Duration: $(_display_time $runtime) "
+    log "$EXIT_CODE" "$MESSAGE"
+}
 
+# Ignore main when sourced
+[[ $0 != "$BASH_SOURCE" ]] && sourced=1 || sourced=0
+if [ $sourced = 0 ];then 
+    echo -e "Executing $0 "
+    e2e_tests_main
+fi

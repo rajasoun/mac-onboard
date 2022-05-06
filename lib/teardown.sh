@@ -1,19 +1,15 @@
 #!/usr/bin/env bash
 
 function teardown(){
-    exit_if_not_mac_os
-    install_homebrew_if_not_installed
-    upgrade_xcode
-    brew_update_upgrade
-    install_apps
-    install_oh_my_zsh
-    cleanup
-    audit_trail
+    brew list | xargs brew uninstall --force
+    brew list --cask | xargs brew uninstall --force
+    rm -fr /usr/local/bin/sentry-cli
+    rm -fr $HOME/.oh-my-zsh
 }
 
 function teardown_main(){
     start=$(date +%s)
-    echo "$start" > dotfiles/.setup
+    echo "Action: Teardown | Start Time: $start" > dotfiles/.setup
     teardown
     EXIT_CODE="$?"
     end=$(date +%s)

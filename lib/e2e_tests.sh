@@ -104,7 +104,7 @@ function test(){
 
 function e2e_tests_main(){
     start=$(date +%s)
-    echo "$start" > dotfiles/.setup
+    echo "Action: Test | Start Time: $start" > dotfiles/.setup
     test
     EXIT_CODE="$?"
     end=$(date +%s)

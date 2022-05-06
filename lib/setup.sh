@@ -150,7 +150,7 @@ function setup(){
 
 function setup_main(){
     start=$(date +%s)
-    echo "$start" > dotfiles/.setup
+    echo "Action: Setup | Start Time: $start" > dotfiles/.setup
     setup
     EXIT_CODE="$?"
     end=$(date +%s)

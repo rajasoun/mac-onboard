@@ -46,12 +46,18 @@ function uninstall_visual_studio_code_on_mac(){
     echo "Finished Uninstallation process."
 }
 
+function uninstall_visual_studio_code_extension(){
+    code --list-extensions | xargs -L 1 code --uninstall-extension
+}
+
 function uninstall_apps(){
+    uninstall_visual_studio_code_extension
     uninstall_visual_studio_code_on_mac
     rm -fr /usr/local/bin/sentry-cli
     rm -fr $HOME/.oh-my-zsh
     rm -fr  /usr/local/share/zsh-autosuggestions
     rm -fr  /usr/local/share/zsh-syntax-highlighting
+    pip3 freeze | xargs pip3 uninstall -y
 }
 function teardown(){
     if command -v brew >/dev/null 2>&1; then

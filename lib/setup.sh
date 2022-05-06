@@ -31,6 +31,8 @@ function install_visual_studio_code(){
     if [ ! -f "/usr/local/bin/code" ];then
         echo -e "${ORANGE} Installing Visual Studio Code"
         brew install --cask visual-studio-code
+        EXTENSIONS=$(sed -e '/^ *$/d' packages/extensions.txt)
+        echo $EXTENSIONS | xargs -L 1 echo code --install-extension
     else
         echo -e "${ORANGE} Visual Studio Code Alreday Installed."
     fi

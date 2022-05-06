@@ -58,13 +58,13 @@ function install_apps(){
     install_sha2
 }
 
-function install_sha2(){
-    pkg="sha2"
-    if [ ! $(brew list $pkg --version) ];then
+function install_pkg(){
+    pkg=${1:-sha2}
+    if brew list --versions  $pkg > /dev/null; then
+        echo -e "${ORANGE} $pkg Alreday Installed."
+    else
         echo -e "${ORANGE} Installing $pkg"
         brew install $pkg
-    else
-        echo -e "${ORANGE} $pkg Alreday Installed."
     fi
 }
 

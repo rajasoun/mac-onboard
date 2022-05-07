@@ -12,3 +12,4 @@ go
 httpie
 wget
 node
+asciinema

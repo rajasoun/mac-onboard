@@ -4,7 +4,7 @@
     * Open Terminal Window and run following commands
 
         ```sh
-        mkdir workspace 
+        mkdir workspace
         cd workspace
         git clone https://github.com/rajasoun/mac-onboard
         cd mac-onboard

@@ -137,7 +137,7 @@ function audit_trail(){
 
 function check_integrity(){
     brew_integrity=$(brew list --version | sha256sum | awk '{print $1}')
-    if [ $(cat "${HOME}/.setup" | grep -c $brew_integrity) = 1 ];then 
+    if [ $(cat "${HOME}/.setup" | grep -c $brew_integrity) = 1 ];then
         echo -e "${GREEN}Integrity Check - Passsed${NC}\n"
         return 0
     else

@@ -80,8 +80,9 @@ In macOS Terminal Window, Run following commands for application installation
 ```
 </details>
 
+## 3. Test
 <details>
-<summary>4. Test </summary>
+<summary>1. End To End (e2e) Tests  </summary>
 In macOS Terminal Window, Run following commands for application installation 
 
 ```sh
@@ -89,9 +90,8 @@ In macOS Terminal Window, Run following commands for application installation
 ```
 </details>
 
-## Debugging
-
-> Ensure No Credntials Gets Typed
+<details>
+<summary>2. Sharing Test Output </summary>
 
 Execute using `script` command and share the log.txt
 
@@ -101,3 +101,4 @@ script log.txt ./assist.sh setup
 script log.txt ./assist.sh test
 script log.txt ./assist.sh check
 ```
+</details>

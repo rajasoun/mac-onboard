@@ -30,55 +30,58 @@ Onboard Automation script configures and installs the following.
 ## 1. Prerequisites Checks
 
 <details>
-  <summary>1 Docker Desktop for Mac</summary>
-  
+<summary>1 Docker Desktop for Mac</summary>
 In macOS Terminal Window, Run Prerequisites Checks for Docker Desktop Installation
 
 ```sh
-    ./assist.sh pre-checks
+./assist.sh pre-checks
 ```
 </details>
 
 <details>
-  <summary>2 SpeedTest via Docker</summary>
-  In macOS Terminal Window, Run Prerequisites Checks for Docker
-    ```sh
-      ./assist.sh speed-test
-    ```
+<summary>2 SpeedTest via Docker</summary>
+In macOS Terminal Window, Run Prerequisites Checks for Docker
+
+```sh
+./assist.sh speed-test
+```
 </details>
 
 ## 2. Setup
 
 <details>
-  <summary>1. Workspace & Applications</summary>
-  In macOS Terminal Window, Run following commands for workspace setup
-    ```sh
-    mkdir -p workspace
-    cd workspace
-    git clone https://github.com/rajasoun/mac-onboard
-    cd mac-onboard
-    ```
+<summary>1. Workspace & Applications</summary>
+In macOS Terminal Window, Run following commands for workspace setup
+```sh
+mkdir -p workspace
+cd workspace
+git clone https://github.com/rajasoun/mac-onboard
+cd mac-onboard
+```
 </details>
+
 <details>
-  <summary>2. Teardown </summary>
-  In macOS Terminal Window, Run following command to teardown the existing setup
-      ```sh
-    ./assist.sh teardown # Will remove all packages
-    ```
+<summary>2. Teardown </summary>
+In macOS Terminal Window, Run following command to teardown the existing setup
+```sh
+./assist.sh teardown # Will remove all packages
+```
 </details>
+
 <details>
-  <summary>3. Setup </summary>
-  In macOS Terminal Window, Run following commands for application installation 
-      ```sh
-    ./assist.sh setup 
-    ```
+<summary>3. Setup </summary>
+In macOS Terminal Window, Run following commands for application installation 
+```sh
+./assist.sh setup 
+```
 </details>
+
 <details>
-  <summary>4. Test </summary>
-  In macOS Terminal Window, Run following commands for application installation 
-      ```sh
-    ./assist.sh test 
-    ```
+<summary>4. Test </summary>
+In macOS Terminal Window, Run following commands for application installation 
+```sh
+./assist.sh test 
+```
 </details>
 
 ## Debugging

@@ -29,15 +29,17 @@ Onboard Automation script configures and installs the following.
 
 <details>
   <summary>1 Docker Desktop for Mac</summary>
+  
   In macOS Terminal Window, Run Prerequisites Checks for Docker Desktop Installation
-      ```sh
+
+    ```sh
       ./assist.sh pre-checks
     ```
 </details>
 <details>
   <summary>2 SpeedTest via Docker</summary>
   In macOS Terminal Window, Run Prerequisites Checks for Docker
-      ```sh
+    ```sh
       ./assist.sh speed-test
     ```
 </details>

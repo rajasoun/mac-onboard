@@ -13,9 +13,11 @@ Onboard Automation script configures and installs the following.
     - Check buildkit is set to false for Apple Chip in ~/.docker/daemon.json
 1. Test Docker Setup 
     - Run speed test 
+    
     ```sh
     MSYS_NO_PATHCONV=1  docker run --rm rajasoun/speedtest:0.1.0 "/go/bin/speedtest-go"
     ```
+
 1. Mac [Xcode](https://developer.apple.com/xcode/)
 1. Package Manager -[brew](https://brew.sh/)
    - [Git Bash](https://git-scm.com/)
@@ -30,12 +32,13 @@ Onboard Automation script configures and installs the following.
 <details>
   <summary>1 Docker Desktop for Mac</summary>
   
-  In macOS Terminal Window, Run Prerequisites Checks for Docker Desktop Installation
+In macOS Terminal Window, Run Prerequisites Checks for Docker Desktop Installation
 
-    ```sh
-      ./assist.sh pre-checks
-    ```
+```sh
+    ./assist.sh pre-checks
+```
 </details>
+
 <details>
   <summary>2 SpeedTest via Docker</summary>
   In macOS Terminal Window, Run Prerequisites Checks for Docker
@@ -49,7 +52,7 @@ Onboard Automation script configures and installs the following.
 <details>
   <summary>1. Workspace & Applications</summary>
   In macOS Terminal Window, Run following commands for workspace setup
-      ```sh
+    ```sh
     mkdir -p workspace
     cd workspace
     git clone https://github.com/rajasoun/mac-onboard

@@ -51,7 +51,9 @@ In macOS Terminal Window, Run Prerequisites Checks for Docker
 
 <details>
 <summary>1. Workspace & Applications</summary>
+
 In macOS Terminal Window, Run following commands for workspace setup
+
 ```sh
 mkdir -p workspace
 cd workspace
@@ -63,6 +65,7 @@ cd mac-onboard
 <details>
 <summary>2. Teardown </summary>
 In macOS Terminal Window, Run following command to teardown the existing setup
+
 ```sh
 ./assist.sh teardown # Will remove all packages
 ```
@@ -71,6 +74,7 @@ In macOS Terminal Window, Run following command to teardown the existing setup
 <details>
 <summary>3. Setup </summary>
 In macOS Terminal Window, Run following commands for application installation 
+
 ```sh
 ./assist.sh setup 
 ```
@@ -79,6 +83,7 @@ In macOS Terminal Window, Run following commands for application installation
 <details>
 <summary>4. Test </summary>
 In macOS Terminal Window, Run following commands for application installation 
+
 ```sh
 ./assist.sh test 
 ```

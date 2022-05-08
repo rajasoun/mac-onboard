@@ -26,41 +26,18 @@ Refernces:
 
 - Docker Desktop for Windows [Troubleshooting Guide](https://docs.docker.com/desktop/windows/troubleshoot/#virtualization-must-be-enabled)
 
+## Applications Setup
 
-1. Bootstrap MacOS to use Visual Studio Code DevContainer
-    * Open Terminal Window and run following commands
+Open Terminal Window and run following commands. Bootstrap MacOS to use Visual Studio Code DevContainer
 
-        ```sh
-        mkdir workspace
-        cd workspace
-        git clone https://github.com/rajasoun/mac-onboard
-        cd mac-onboard
-        ./assist.sh teardown # Will remove all packages
-        ./assist.sh setup
-        ./assist.sh test
-        ```
-
-    * On Sucess
-
-        ```sh
-        💯  All passed
-        ```
-
-    * On Failure - Review Failed Tests and Fix
-
-        ```sh
-        💥  Failed tests
-        ```
-
-1. Install [Docker Desktop for Mac](https://docs.docker.com/desktop/mac/install/)
-    * To Get Details about the Type of Chip
-        ```sh
-        sysctl -n machdep.cpu.brand_string
-        ```
-
-1. Test Docker Setup
     ```sh
-    docker run --rm  hello-world
+    mkdir -p workspace
+    cd workspace
+    git clone https://github.com/rajasoun/mac-onboard
+    cd mac-onboard
+    ./assist.sh teardown # Will remove all packages
+    ./assist.sh setup
+    ./assist.sh test
     ```
 
 ## Debugging

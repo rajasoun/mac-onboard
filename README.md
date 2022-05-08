@@ -12,7 +12,10 @@ Onboard Automation script configures and installs the following.
     - If Chipset type is Apple Silicon, install Rosetta 2
     - Check buildkit is set to false for Apple Chip in ~/.docker/daemon.json
 1. Test Docker Setup 
-    - Run speed test `MSYS_NO_PATHCONV=1  docker run --rm rajasoun/speedtest:0.1.0 "/go/bin/speedtest-go"`
+    - Run speed test 
+    ```sh
+    MSYS_NO_PATHCONV=1  docker run --rm rajasoun/speedtest:0.1.0 "/go/bin/speedtest-go"
+    ```
 1. Mac [Xcode](https://developer.apple.com/xcode/)
 1. Package Manager -[brew](https://brew.sh/)
    - [Git Bash](https://git-scm.com/)

@@ -1,4 +1,2 @@
 ms-vscode-remote.remote-containers
-mads-hartmann.bash-ide-vscode
-michelemelluso.gitignore
-golang.go
+

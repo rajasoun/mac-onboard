@@ -10,12 +10,13 @@ source "$SCRIPT_DIR/lib/display.sh"
 source "$SCRIPT_DIR/lib/teardown.sh"
 source "$SCRIPT_DIR/lib/setup.sh"
 source "$SCRIPT_DIR/lib/e2e_tests.sh"
-
+source "$SCRIPT_DIR/lib/pre_checks.sh"
 
 opt="$1"
 choice=$( tr '[:upper:]' '[:lower:]' <<<"$opt" )
 
 case ${choice} in
+    "pre-checks") pre_checks_main;;
     "setup")setup_main ;;
     "test")e2e_tests_main ;;
     "teardown")teardown_main ;;
@@ -25,6 +26,7 @@ case ${choice} in
 cat <<-EOF
 Commands:
 ---------
+  pre-checks  -> Perform Pre-requisites Checks
   setup       -> Setup Mac
   test        -> Run Automated Test
   teardown    -> Teardown Dev Container

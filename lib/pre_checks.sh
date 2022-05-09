@@ -173,7 +173,7 @@ function check_install_upgrade_xcode(){
     echo -e "\n"
 }
 
-function docker_main(){
+function pre_checks_main(){
     prerequisite_checks
     echo -e "\n2 Docker Speed Test - ✅ \n"
     MSYS_NO_PATHCONV=1  docker run --rm rajasoun/speedtest:0.1.0 "/go/bin/speedtest-go"
@@ -184,5 +184,5 @@ function docker_main(){
 [[ $0 != "$BASH_SOURCE" ]] && sourced=1 || sourced=0
 if [ $sourced = 0 ];then
     echo -e "Executing $0 \n"
-    docker_main
+    pre_checks_main
 fi

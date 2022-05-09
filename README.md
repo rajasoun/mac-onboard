@@ -2,7 +2,9 @@
 
 macOS Laptop setup for Developer with Docker Desktop & Applications. The primary purpose is to have a standard way of configuring a development environment that is simple, fast and completely automated.
 
-Onboard Automation script configures and installs the following.
+## Automation 
+
+Automation script does following checks, configurations and application/tools installation. 
 
 <details>
 <summary>Containerization - Docker Desktop for Mac</summary>

@@ -11,18 +11,39 @@ Onboard Automation script configures and installs the following.
    - Download Docker Desktop Binary based on Chipset Type and install in headless mode 
     - If Chipset type is Apple Silicon, install Rosetta 2
     - Check buildkit is set to false for Apple Chip in ~/.docker/daemon.json
+
 1. Test Docker Setup 
     - Run speed test 
     
-    ```sh
-    MSYS_NO_PATHCONV=1  docker run --rm rajasoun/speedtest:0.1.0 "/go/bin/speedtest-go"
-    ```
+1. [Xcode Tools](https://developer.apple.com/xcode/)
 
-1. Mac [Xcode](https://developer.apple.com/xcode/)
-1. Package Manager -[brew](https://brew.sh/)
-   - [Git Bash](https://git-scm.com/)
-   - [GitHub CLI](https://cli.github.com/)
-   - Code Editor (IDE) - [Visual Studio Code](https://code.visualstudio.com/)
+1. Package Manager - [Homebrew](https://brew.sh/)
+
+    - Nix Tools 
+        - zsh
+        - zsh-autosuggestions - Suggests commands as you type based on history and completions.
+        - zsh-syntax-highlighting - Syntax highlighter for the Zsh shell
+        - [coreutils](https://www.gnu.org/software/coreutils/) -  File, shell and text manipulation utilities 
+
+    - Internet Tool
+        - ca-certificates - [Digital Certificate](https://i.stack.imgur.com/mR9xE.png) issued by a certificate authority (CA), so SSL clients (such as wget, curl, httpie) can use it to verify the SSL certificates sign by this CA
+        - wget - Retrieving files using HTTP, HTTPS, FTP and FTPS
+        - curl - Transferring data with URLs
+        - openssl - General-purpose cryptography for secure communication.
+        - netcat - Networking utility which reads and writes data across networks 
+        - [httpie](https://httpie.io/) - Command-line HTTP and API testing client 
+
+    - Programming Languages 
+        - [go](https://go.dev/)
+        - [python@3.10](https://www.python.org/)
+        - [node](https://nodejs.org/en/)
+
+    - Programming Tools  
+        - [gh](https://github.com/cli/cli) - GitHub on the command line
+        - [jq](https://stedolan.github.io/jq/) - sed for JSON data
+    - Terminal Productivity Tools
+        - [asciinema](https://asciinema.org/) - Recording terminal sessions and sharing them on the web
+
 1. Visual Studio Code [Extensions](https://code.visualstudio.com/docs/editor/extension-marketplace)
    - [ms-vscode-remote.remote-containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) - [Developing inside a Container](https://code.visualstudio.com/docs/remote/containers)
    - [golang.go](https://marketplace.visualstudio.com/items?itemName=golang.Go)

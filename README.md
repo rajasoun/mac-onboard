@@ -19,13 +19,6 @@ Following Applications & Tools are setup/teardown from the automation script
 </details>
 
 <details>
-<summary>Test Docker Setup</summary>
-
-- Run speed test 
-
-</details>
-
-<details>
 <summary>XCode for Mac</summary>
 
 - [Xcode Tools](https://developer.apple.com/xcode/)

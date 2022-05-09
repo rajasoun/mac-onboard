@@ -62,12 +62,18 @@ function teardown(){
     else
         echo -e "Visual Studio Code Already Uninstalled"
     fi
-    # python3 global packages
-    if command -v pip3 >/dev/null 2>&1; then
-        pip3 freeze | xargs pip3 uninstall -y
-    else
-        echo -e "Python3 Global Packages Already Uninstalled"
+    python3_version=$(python3 --version)
+    if [ $(version $python3_version) -ge $(version "3.30") ]; then
+        # python3 global packages
+        if command -v pip3 >/dev/null 2>&1; then
+            pip3 freeze | xargs pip3 uninstall -y
+        else
+            echo -e "Python3 Global Packages Already Uninstalled"
+        fi
+    else 
+        echo -e "Python3 Already Uninstalled"
     fi
+    
     # brew
     if command -v brew >/dev/null 2>&1; then
         brew list | xargs brew uninstall --force

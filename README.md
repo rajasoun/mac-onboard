@@ -2,9 +2,9 @@
 
 macOS Laptop setup for Developer with Docker Desktop & Applications. The primary purpose is to have a standard way of configuring a development environment that is simple, fast and completely automated.
 
-## Automation 
+## Application & Tools Summary 
 
-Automation script does following checks, configurations and application/tools installation. 
+Following Applications & Tools are setup/teardown from the automation script
 
 <details>
 <summary>Containerization - Docker Desktop for Mac</summary>
@@ -61,6 +61,10 @@ Automation script does following checks, configurations and application/tools in
    - [golang.go](https://marketplace.visualstudio.com/items?itemName=golang.Go)
 
 </details>
+
+# Automation 
+
+Automation script does following Prerequisites Checks, Setup and Tests 
 
 ## 1. Prerequisites Checks
 

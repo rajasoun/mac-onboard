@@ -66,7 +66,7 @@ function check_mac_ram_size(){
 # If virtual box installed should be > 4.3.30
 function check_virtual_box_installed_version(){
     if [ $(check_command_installed "vboxmanage") = "Installed" ]; then
-        echo -e "1.3 ${ORANGE}Virtual Box Installation Found - 🟠 ${NC}"
+        echo -e "${ORANGE}1.3 Virtual Box Installation Found - 🟠 ${NC}"
         vbox_version=$(vboxmanage --version)
         if [ $(version $vbox_version) -gt $(version "4.3.30") ]; then
             echo -e "   ${GREEN}1.3.1 Virtual Box version $vbox_version${NC} - ✅ Condition > 4.3.30\n"
@@ -143,7 +143,7 @@ function prerequisite_checks(){
 
 function upgrade_xcode(){
     # find the CLI Tools update
-    echo -e "   2.1 Check For Xcode CLI version updates..."
+    echo -e "   ${ORANGE}2.1 Check For Xcode CLI version updates...${NC}"
     PROD=$(softwareupdate -l    | \
         grep "\*.*Command Line" | \
                     head -n 1   | \

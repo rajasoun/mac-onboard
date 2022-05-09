@@ -29,7 +29,7 @@ Commands:
 ---------
   pre-checks  -> Perform Pre-requisites Checks
   setup       -> Setup Mac
-  speed-test  -> Speed Test using Docker 
+  speed-test  -> Speed Test using Docker
   test        -> Run Automated Test
   teardown    -> Teardown Dev Container
   check       -> Check Integrity of the automated setup

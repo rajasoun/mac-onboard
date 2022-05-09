@@ -27,8 +27,8 @@ function _prompt_confirm() {
 
 # converts version into digits
 # example: version 1.1.1 -> 1001001000
-function version { 
-    echo "$@" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }'; 
+function version {
+    echo "$@" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }';
 }
 
 # Check if command installed
@@ -48,7 +48,7 @@ function check_mac_os_version(){
     os_version=$(sw_vers -productVersion)
     if [ $(version $os_version) -ge $(version "10.15") ]; then
         echo -e "${GREEN}\n1.1 macOS version $os_version${NC} - ✅ Condition >= 10.15\n"
-    else 
+    else
         echo -e "${RED}\n1.1 macOS version $os_version${NC}- ❌ Condition >= 10.15\n"
     fi
 }
@@ -58,7 +58,7 @@ function check_mac_ram_size(){
     ram_size=$(system_profiler SPHardwareDataType | grep "Memory:" | awk '{print $2}')
     if [ $ram_size -ge 4 ]; then
         echo -e "${GREEN}1.2 RAM size $ram_size GB${NC} - ✅ Condition >= 4 GB\n"
-    else 
+    else
         echo -e "${GREEN}1.2 RAM size $ram_size GB${NC} - ❌ Condition >= 4 GB\n"
     fi
 }
@@ -70,10 +70,10 @@ function check_virtual_box_installed_version(){
         vbox_version=$(vboxmanage --version)
         if [ $(version $vbox_version) -gt $(version "4.3.30") ]; then
             echo -e "   ${GREEN}1.3.1 Virtual Box version $vbox_version${NC} - ✅ Condition > 4.3.30\n"
-        else 
+        else
             echo -e "   ${RED}1.3.1 Virtual Box version $vbox_version${NC} - ❌ Condition > 4.3.30\n"
         fi
-    else 
+    else
         echo -e "${GREEN}1.3 Virtual Box Installation Found ${NC}\n"
     fi
 }
@@ -85,31 +85,31 @@ function docker_install_prompt(){
         echo -e "   Download Docker Desktop for $chip_type Chip"
         echo -e "   https://docs.docker.com/desktop/mac/install/\n"
         _prompt_confirm "   ${ORANGE}Is Docker Desktop for $chip_type Chip Installation Done - Continue ? ${NC}"
-    else 
+    else
         echo -e "${GREEN}1.4 Docker Desktop for $chip_type Chip${NC} - ✅"
     fi
 }
 
 function buildkit_config(){
     buildkit_config=$(cat ~/.docker/daemon.json | grep buildkit | awk {'print $2'})
-    if [ $buildkit_config = "true" ];then 
+    if [ $buildkit_config = "true" ];then
         echo "true"
-    else 
+    else
         echo "false"
     fi
 }
 
 function check_mac_chipset(){
-    chip_set_type=$(sysctl -n machdep.cpu.brand_string) 
+    chip_set_type=$(sysctl -n machdep.cpu.brand_string)
     choice=$( tr '[:upper:]' '[:lower:]' <<<"$chip_set_type" )
     case ${choice} in
         *"intel"*)
             docker_install_prompt "Intel"
             msg="1.4.1 buildkit Config Check"
-            # In File $HOME/.docker/daemon.json 
+            # In File $HOME/.docker/daemon.json
             if [ $(buildkit_config) = "true" ];then
                 echo -e "   ${GREEN}$msg - ✅ Condition buildkit=true${NC}\n"
-            else 
+            else
                 echo -e "   ${RED}$msg - ❌ Condition buildkit=true${NC}\n"
                 echo -e "   ${ORANGE}Change Config to true in Docker Desktop Settings ${NC}\n"
             fi
@@ -121,7 +121,7 @@ function check_mac_chipset(){
             echo -e "   1.4.2 buildkit Config Check"
             if [ $(buildkit_config) = "false" ];then
                 echo -e "       ${GREEN}1.4.2.1 buildkit in $HOME/.docker/daemon.json is false - ✅ \n"
-            else 
+            else
                 echo -e "       ${RED}1.4.2.1 buildkit in $HOME/.docker/daemon.json is true - ❌ \n"
                 echo -e "       ${ORANGE} Change Config to true in Docker Desktop Settings ${NC}\n"
             fi
@@ -153,9 +153,9 @@ function upgrade_xcode(){
     if [[ ! -z "$PROD" ]]; then
         softwareupdate -i "$PROD" --verbose
         EXIT_CODE=$?
-        if [ $EXIT_CODE -eq 0 ];then 
+        if [ $EXIT_CODE -eq 0 ];then
             echo -e "   ${GREEN}2.2 Xcode CLI version update - ✅${NC}"
-        else 
+        else
             echo -e "   ${GREEN}2.2 Xcode CLI version update - ❌${NC}"
         fi
     fi
@@ -166,7 +166,7 @@ function check_install_upgrade_xcode(){
         xcode_version=$(xcode-select --version)
         echo -e "${GREEN}2 Xcode [$xcode_version] Found${NC} - ✅ Xcode"
         upgrade_xcode
-    else 
+    else
         echo -e "${RED}2 Xcode Not Found - 🟠 ${NC}\n"
         xcode-select --install
     fi

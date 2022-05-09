@@ -70,10 +70,10 @@ function teardown(){
         else
             echo -e "Python3 Global Packages Already Uninstalled"
         fi
-    else 
+    else
         echo -e "Python3 Already Uninstalled"
     fi
-    
+
     # brew
     if command -v brew >/dev/null 2>&1; then
         brew list | xargs brew uninstall --force

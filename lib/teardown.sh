@@ -54,25 +54,21 @@ function uninstall_visual_studio_code_extension(){
     fi
 }
 
-function uninstall_apps(){
-    uninstall_visual_studio_code_extension
-    uninstall_visual_studio_code_on_mac
-    rm -fr /usr/local/bin/sentry-cli
-    rm -fr $HOME/.oh-my-zsh
-    rm -fr  /usr/local/share/zsh-autosuggestions
-    rm -fr  /usr/local/share/zsh-syntax-highlighting
-    pip3 freeze | xargs pip3 uninstall -y
-}
-
-function uninstall_apps(){
-    rm -fr /usr/local/bin/sentry-cli
-    rm -fr $HOME/.oh-my-zsh
-    rm -fr  /usr/local/share/zsh-autosuggestions
-    rm -fr  /usr/local/share/zsh-syntax-highlighting
-    pip3 freeze | xargs pip3 uninstall -y
-}
-
 function teardown(){
+    # visual studio code
+    if command -v code >/dev/null 2>&1; then
+        uninstall_visual_studio_code_extension
+        uninstall_visual_studio_code_on_mac
+    else
+        echo -e "Visual Studio Code Already Uninstalled"
+    fi
+    # python3 global packages
+    if command -v pip3 >/dev/null 2>&1; then
+        pip3 freeze | xargs pip3 uninstall -y
+    else
+        echo -e "Python3 Global Packages Already Uninstalled"
+    fi
+    # brew
     if command -v brew >/dev/null 2>&1; then
         brew list | xargs brew uninstall --force
         brew list --cask | xargs brew uninstall --force
@@ -80,7 +76,11 @@ function teardown(){
     else
         echo -e "Homebrew Already Uninstalled"
     fi
-    uninstall_apps
+    # zsh, themes and plugins
+    rm -fr /usr/local/bin/sentry-cli
+    rm -fr $HOME/.oh-my-zsh
+    rm -fr  /usr/local/share/zsh-autosuggestions
+    rm -fr  /usr/local/share/zsh-syntax-highlighting
 }
 
 function teardown_main(){

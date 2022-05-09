@@ -4,18 +4,33 @@ macOS Laptop setup for Developer with Docker Desktop & Applications. The primary
 
 Onboard Automation script configures and installs the following.
 
-1. Containerization - [Docker Desktop for Mac](https://docs.docker.com/desktop/mac/install/)
+<details>
+<summary>Containerization - Docker Desktop for Mac</summary>
+
+- Containerization - [Docker Desktop for Mac](https://docs.docker.com/desktop/mac/install/)
    - Check macOS Version for Compatibility >=10.15
    - RAM Size > 4 GB
    - VirtualBox <= 4.3.30 must not be installed as it is not compatible with Docker Desktop
    - Download Docker Desktop Binary based on Chipset Type and install in headless mode 
     - If Chipset type is Apple Silicon, install Rosetta 2
     - Check buildkit is set to false for Apple Chip in ~/.docker/daemon.json
+</details>
 
-1. Test Docker Setup 
-    - Run speed test 
-    
-1. [Xcode Tools](https://developer.apple.com/xcode/)
+<details>
+<summary>Test Docker Setup</summary>
+
+- Run speed test 
+
+</details>
+
+<details>
+<summary>XCode for Mac</summary>
+
+- [Xcode Tools](https://developer.apple.com/xcode/)
+</details>
+
+<details>
+<summary>Applications & Tools</summary>
 
 1. Package Manager - [Homebrew](https://brew.sh/)
 
@@ -47,6 +62,8 @@ Onboard Automation script configures and installs the following.
 1. Visual Studio Code [Extensions](https://code.visualstudio.com/docs/editor/extension-marketplace)
    - [ms-vscode-remote.remote-containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) - [Developing inside a Container](https://code.visualstudio.com/docs/remote/containers)
    - [golang.go](https://marketplace.visualstudio.com/items?itemName=golang.Go)
+
+</details>
 
 ## 1. Prerequisites Checks
 

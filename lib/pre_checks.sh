@@ -164,19 +164,23 @@ function upgrade_xcode(){
 function check_install_upgrade_xcode(){
     if [ $(check_command_installed "xcode-select") = "Installed" ]; then
         xcode_version=$(xcode-select --version)
-        echo -e "3 ${GREEN}Xcode [$xcode_version] Found${NC} - ✅ Xcode"
+        echo -e "2 ${GREEN}Xcode [$xcode_version] Found${NC} - ✅ Xcode"
         upgrade_xcode
     else 
-        echo -e "3 ${RED}Xcode Not Found - 🟠 ${NC}\n"
+        echo -e "2 ${RED}Xcode Not Found - 🟠 ${NC}\n"
         xcode-select --install
     fi
     echo -e "\n"
 }
 
+function speed_test(){
+    echo -e "\nDocker Speed Test - ✅ \n"
+    MSYS_NO_PATHCONV=1  docker run --rm rajasoun/speedtest:0.1.0 "/go/bin/speedtest-go"
+    echo -e "\n"
+}
+
 function pre_checks_main(){
     prerequisite_checks
-    echo -e "\n2 Docker Speed Test - ✅ \n"
-    MSYS_NO_PATHCONV=1  docker run --rm rajasoun/speedtest:0.1.0 "/go/bin/speedtest-go"
     check_install_upgrade_xcode
 }
 

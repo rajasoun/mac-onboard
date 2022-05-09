@@ -18,6 +18,7 @@ choice=$( tr '[:upper:]' '[:lower:]' <<<"$opt" )
 case ${choice} in
     "pre-checks") pre_checks_main;;
     "setup")setup_main ;;
+    "speed-test") speed_test;;
     "test")e2e_tests_main ;;
     "teardown")teardown_main ;;
     "check") check_integrity ;;

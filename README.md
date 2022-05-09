@@ -131,6 +131,8 @@ Execute using `script` command and share the log.txt
 script log.txt ./assist.sh teardown
 script log.txt ./assist.sh setup
 script log.txt ./assist.sh test
+script log.txt ./assist.sh pre-checks
+script log.txt ./assist.sh speed-test
 script log.txt ./assist.sh check
 ```
 </details>

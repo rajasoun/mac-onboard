@@ -69,12 +69,12 @@ function check_virtual_box_installed_version(){
         echo -e "1.3 ${ORANGE}Virtual Box Installation Found - 🟠 ${NC}"
         vbox_version=$(vboxmanage --version)
         if [ $(version $vbox_version) -gt $(version "4.3.30") ]; then
-            echo -e "   1.3.1 ${GREEN}Virtual Box version $vbox_version${NC} - ✅ Condition > 4.3.30\n"
+            echo -e "   ${GREEN}1.3.1 Virtual Box version $vbox_version${NC} - ✅ Condition > 4.3.30\n"
         else 
-            echo -e "   1.3.1 ${RED}Virtual Box version $vbox_version${NC} - ❌ Condition > 4.3.30\n"
+            echo -e "   ${RED}1.3.1 Virtual Box version $vbox_version${NC} - ❌ Condition > 4.3.30\n"
         fi
     else 
-        echo -e "1.3 ${GREEN}Virtual Box Installation Found ${NC}\n"
+        echo -e "${GREEN}1.3 Virtual Box Installation Found ${NC}\n"
     fi
 }
 
@@ -108,9 +108,9 @@ function check_mac_chipset(){
             msg="1.4.1 buildkit Config Check"
             # In File $HOME/.docker/daemon.json 
             if [ $(buildkit_config) = "true" ];then
-                echo -e "   $msg - ✅ Condition buildkit=true${NC}\n"
+                echo -e "   ${GREEN}$msg - ✅ Condition buildkit=true${NC}\n"
             else 
-                echo -e "   $msg - ❌ Condition buildkit=true${NC}\n"
+                echo -e "   ${RED}$msg - ❌ Condition buildkit=true${NC}\n"
                 echo -e "   ${ORANGE}Change Config to true in Docker Desktop Settings ${NC}\n"
             fi
         ;;
@@ -120,10 +120,10 @@ function check_mac_chipset(){
             softwareupdate --install-rosetta
             echo -e "   1.4.2 buildkit Config Check"
             if [ $(buildkit_config) = "false" ];then
-                echo -e "       1.4.2.1 buildkit in $HOME/.docker/daemon.json is false - ✅ \n"
+                echo -e "       ${GREEN}1.4.2.1 buildkit in $HOME/.docker/daemon.json is false - ✅ \n"
             else 
-                echo -e "       1.4.2.1 buildkit in $HOME/.docker/daemon.json is true - ❌ \n"
-                echo -e "        ${ORANGE} Change Config to true in Docker Desktop Settings ${NC}\n"
+                echo -e "       ${RED}1.4.2.1 buildkit in $HOME/.docker/daemon.json is true - ❌ \n"
+                echo -e "       ${ORANGE} Change Config to true in Docker Desktop Settings ${NC}\n"
             fi
         ;;
         "*")
@@ -143,7 +143,7 @@ function prerequisite_checks(){
 
 function upgrade_xcode(){
     # find the CLI Tools update
-    echo -e "   3.1 Check For Xcode CLI version updates.."
+    echo -e "   2.1 Check For Xcode CLI version updates..."
     PROD=$(softwareupdate -l    | \
         grep "\*.*Command Line" | \
                     head -n 1   | \
@@ -154,9 +154,9 @@ function upgrade_xcode(){
         softwareupdate -i "$PROD" --verbose
         EXIT_CODE=$?
         if [ $EXIT_CODE -eq 0 ];then 
-            echo -e "   3.2 Xcode CLI version update - ✅"
+            echo -e "   ${GREEN}2.2 Xcode CLI version update - ✅${NC}"
         else 
-            echo -e "   3.2 Xcode CLI version update - ❌"
+            echo -e "   ${GREEN}2.2 Xcode CLI version update - ❌${NC}"
         fi
     fi
 }
@@ -164,10 +164,10 @@ function upgrade_xcode(){
 function check_install_upgrade_xcode(){
     if [ $(check_command_installed "xcode-select") = "Installed" ]; then
         xcode_version=$(xcode-select --version)
-        echo -e "2 ${GREEN}Xcode [$xcode_version] Found${NC} - ✅ Xcode"
+        echo -e "${GREEN}2 Xcode [$xcode_version] Found${NC} - ✅ Xcode"
         upgrade_xcode
     else 
-        echo -e "2 ${RED}Xcode Not Found - 🟠 ${NC}\n"
+        echo -e "${RED}2 Xcode Not Found - 🟠 ${NC}\n"
         xcode-select --install
     fi
     echo -e "\n"

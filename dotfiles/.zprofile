@@ -33,7 +33,7 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/h
 export PATH="/usr/local/opt/openssl@3/bin:$PATH"
 
 # Core Utils
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+export PATH="$($(which brew) --prefix coreutils)/libexec/gnubin:$PATH"
 
 # curl
 export PATH="/usr/local/opt/curl/bin:$PATH"

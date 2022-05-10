@@ -51,7 +51,6 @@ Following Applications & Tools are setup/teardown from the automation script
         - [asciinema](https://asciinema.org/) - Recording terminal sessions and sharing them on the web
 1. Visual Studio Code [Extensions](https://code.visualstudio.com/docs/editor/extension-marketplace)
    - [ms-vscode-remote.remote-containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) - [Developing inside a Container](https://code.visualstudio.com/docs/remote/containers)
-   - [golang.go](https://marketplace.visualstudio.com/items?itemName=golang.Go)
 
 </details>
 

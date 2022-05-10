@@ -83,10 +83,10 @@ function teardown(){
         echo -e "Homebrew Already Uninstalled"
     fi
     # zsh, themes and plugins
-    rm -fr /usr/local/bin/sentry-cli
-    rm -fr $HOME/.oh-my-zsh
-    rm -fr  /usr/local/share/zsh-autosuggestions
-    rm -fr  /usr/local/share/zsh-syntax-highlighting
+    /bin/rm -fr /usr/local/bin/sentry-cli
+    /bin/rm -fr $HOME/.oh-my-zsh
+    /bin/rm -fr  /usr/local/share/zsh-autosuggestions
+    /bin/rm -fr  /usr/local/share/zsh-syntax-highlighting
 }
 
 function teardown_main(){

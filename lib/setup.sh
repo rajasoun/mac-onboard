@@ -66,6 +66,7 @@ function install_pkg(){
         echo -e "${ORANGE} Installing $pkg"
         brew install $pkg
     fi
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 }
 
 function integrity(){

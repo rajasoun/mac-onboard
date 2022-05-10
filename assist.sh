@@ -21,7 +21,7 @@ case ${choice} in
     "speed-test") speed_test;;
     "test")e2e_tests_main ;;
     "teardown")teardown_main ;;
-    "check") check_integrity ;;
+    "check") check_drift ;;
     *)
     echo "${RED}Usage: e2e.sh < setup | test | teardown >${NC}"
 cat <<-EOF
@@ -32,7 +32,7 @@ Commands:
   speed-test  -> Speed Test using Docker
   test        -> Run Automated Test
   teardown    -> Teardown Dev Container
-  check       -> Check Integrity of the automated setup
+  check       -> Check Drift of the automated setup
 EOF
     ;;
 esac

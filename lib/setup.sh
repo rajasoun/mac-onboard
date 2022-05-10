@@ -136,14 +136,15 @@ function audit_trail(){
     backup_copy_dotfile .setup
 }
 
-function check_integrity(){
+function check_drift(){
     brew_integrity=$(brew list --version | sha256sum | awk '{print $1}')
     if [ $(cat "${HOME}/.setup" | grep -c $brew_integrity) = 1 ];then
-        echo -e "${GREEN}Integrity Check - Passsed${NC}\n"
+        echo -e "${GREEN}\nDrift Check - Passsed${NC}"
+        echo -e "   ${GREEN}No Installation(s) found outside of Automation${NC}\n"
         return 0
     else
-        echo -e "${RED}Integrity Check - Failed${NC}\n"
-        echo -e "${ORGANGE}Installation found outside of Automation${NC}\n"
+        echo -e "${RED}\nDrfit Check - Failed${NC}\n"
+        echo -e "   ${ORGANGE}Installation(s) found outside of Automation${NC}\n"
         to_be=$(cat ${PWD}/packages/installed.txt)
         current=$(brew list)
         diff <( echo $to_be ) <( echo $current )

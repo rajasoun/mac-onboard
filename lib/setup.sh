@@ -4,12 +4,22 @@
 PACKAGES=($(cat packages/brew.txt))
 CASKS=($(cat packages/casks.txt))
 
+function fix_brew_path(){
+  if [[ "$(uname -m)" == "arm64" ]]; then
+    homebrew_prefix_default=/opt/homebrew
+  else
+    homebrew_prefix_default=/usr/local
+  fi
+  export PATH="$homebrew_prefix_default/bin:$PATH"  
+}
+
 function install_homebrew_if_not_installed(){
     # Check for Homebrew, install if not installed
     if test ! $(which brew); then
         pretty_print "Installing homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     fi
+    fix_brew_path
 }
 
 function brew_update_upgrade(){

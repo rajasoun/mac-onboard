@@ -40,4 +40,12 @@ export PATH="/usr/local/opt/curl/bin:$PATH"
 
 # python@3.10
 export PATH="/usr/local/opt/python@3.10/bin:$HOME/Library/Python/3.10/bin:$PATH"
+
+# brew 
+if [[ "$(uname -m)" == "arm64" ]]; then
+    homebrew_prefix_default=/opt/homebrew
+else
+    homebrew_prefix_default=/usr/local
+fi
+export PATH="$homebrew_prefix_default/bin:$PATH" 
 ################################################################################################

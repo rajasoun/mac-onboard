@@ -62,7 +62,20 @@ Automation script does following Prerequisites Checks, Setup and Tests
 ## 1. Prerequisites Checks
 
 <details>
-<summary>1 Docker Desktop for Mac</summary>
+<summary>1. Workspace </summary>
+
+In macOS Terminal Window, Run following commands for workspace setup
+
+```sh
+mkdir -p ${HOME}/workspace
+cd workspace
+git clone https://github.com/rajasoun/mac-onboard
+cd mac-onboard
+```
+</details>
+
+<details>
+<summary>2. Docker Desktop for Mac</summary>
 In macOS Terminal Window, Run Prerequisites Checks for Docker Desktop Installation
 
 ```sh
@@ -71,7 +84,7 @@ In macOS Terminal Window, Run Prerequisites Checks for Docker Desktop Installati
 </details>
 
 <details>
-<summary>2 SpeedTest via Docker</summary>
+<summary>3. SpeedTest via Docker</summary>
 In macOS Terminal Window, Run Prerequisites Checks for Docker
 
 ```sh
@@ -82,20 +95,7 @@ In macOS Terminal Window, Run Prerequisites Checks for Docker
 ## 2. Setup
 
 <details>
-<summary>1. Workspace & Applications</summary>
-
-In macOS Terminal Window, Run following commands for workspace setup
-
-```sh
-mkdir -p workspace
-cd workspace
-git clone https://github.com/rajasoun/mac-onboard
-cd mac-onboard
-```
-</details>
-
-<details>
-<summary>2. Teardown </summary>
+<summary>1. Teardown </summary>
 In macOS Terminal Window, Run following command to teardown the existing setup
 
 ```sh
@@ -104,7 +104,7 @@ In macOS Terminal Window, Run following command to teardown the existing setup
 </details>
 
 <details>
-<summary>3. Setup </summary>
+<summary>2. Setup </summary>
 In macOS Terminal Window, Run following commands for application installation
 
 ```sh

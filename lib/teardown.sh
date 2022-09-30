@@ -92,6 +92,10 @@ function teardown(){
     mv ${HOME}/.zshrc ${HOME}/.zshrc.backup
     mv ${HOME}/.zprofile ${HOME}/.zprofile.backup
     rm -fr ${HOME}/.zshrc ${HOME}/.zprofile
+    
+    # Remove Node packages 
+    NODE_PACKAGES=($(cat packages/node_packages.txt))
+    npm uninstall -g ${NODE_PACKAGES[@]}
 }
 
 function teardown_main(){

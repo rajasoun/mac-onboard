@@ -65,7 +65,7 @@ function check_mac_ram_size(){
 
 # If virtual box installed should be > 4.3.30
 function check_virtual_box_installed_version(){
-    if [ $(check_command_installed "vboxmanage") = "Installed" ]; then
+    if [ command -v vboxmanage  >/dev/null 2>&1 ]; then
         echo -e "${ORANGE}1.3 Virtual Box Installation Found - 🟠 ${NC}"
         vbox_version=$(vboxmanage --version)
         if [ $(version $vbox_version) -gt $(version "4.3.30") ]; then
@@ -74,7 +74,7 @@ function check_virtual_box_installed_version(){
             echo -e "   ${RED}1.3.1 Virtual Box version $vbox_version${NC} - ❌ Condition > 4.3.30\n"
         fi
     else
-        echo -e "${GREEN}1.3 Virtual Box Installation Found ${NC}\n"
+        echo -e "${GREEN}1.3 Virtual Box Installation NOT Found ${NC}\n"
     fi
 }
 

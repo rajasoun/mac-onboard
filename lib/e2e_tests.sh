@@ -68,13 +68,14 @@ function check_vs_extensions(){
 }
 
 function e2e_test(){
+    check "zsh" zsh --version
+
     check "brew" brew --version && checkOSPackages "common-os-packages"
 
     check_vs_extensions "ms-vscode-remote.remote-containers"
 
     check "sudo" sudo --version | head -1
     check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]
-    check "zsh" zsh --version
     check "curl" curl --version | head -1
     check "netcat" netcat --version | head -1
 

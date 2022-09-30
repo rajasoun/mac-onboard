@@ -54,6 +54,19 @@ function uninstall_visual_studio_code_extension(){
     fi
 }
 
+function backup_remove_dot_files(){
+    # .zshrc and .zprofile 
+    if [ -f ${HOME}/.zshrc ]; then 
+        mv ${HOME}/.zshrc ${HOME}/.zshrc.backup
+        rm -fr ${HOME}/.zshrc 
+    fi 
+    
+    if [ -f ${HOME}/.zprofile ]; then 
+        mv ${HOME}/.zprofile ${HOME}/.zprofile.backup
+        rm -fr ${HOME}/.zprofile
+    fi 
+}
+
 function teardown(){
     # visual studio code
     if command -v code >/dev/null 2>&1; then
@@ -83,15 +96,12 @@ function teardown(){
         echo -e "Homebrew Already Uninstalled"
     fi
     # zsh, themes and plugins
-    /bin/rm -fr /usr/local/bin/sentry-cli
+    sudo /bin/rm -fr /usr/local/bin/sentry-cli
     /bin/rm -fr $HOME/.oh-my-zsh
     /bin/rm -fr  /usr/local/share/zsh-autosuggestions
     /bin/rm -fr  /usr/local/share/zsh-syntax-highlighting
     
-    # .zshrc and .zprofile 
-    mv ${HOME}/.zshrc ${HOME}/.zshrc.backup
-    mv ${HOME}/.zprofile ${HOME}/.zprofile.backup
-    rm -fr ${HOME}/.zshrc ${HOME}/.zprofile
+    backup_remove_dot_files
     
     # Remove Node packages 
     NODE_PACKAGES=($(cat packages/node_packages.txt))

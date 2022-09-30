@@ -87,6 +87,11 @@ function teardown(){
     /bin/rm -fr $HOME/.oh-my-zsh
     /bin/rm -fr  /usr/local/share/zsh-autosuggestions
     /bin/rm -fr  /usr/local/share/zsh-syntax-highlighting
+    
+    # .zshrc and .zprofile 
+    mv ${HOME}/.zshrc ${HOME}/.zshrc.backup
+    mv ${HOME}/.zprofile ${HOME}/.zprofile.backup
+    rm -fr ${HOME}/.zshrc ${HOME}/.zprofile
 }
 
 function teardown_main(){

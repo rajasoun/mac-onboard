@@ -116,15 +116,16 @@ function check_mac_chipset(){
         ;;
         *"apple"*)
             docker_install_prompt "Apple"
-            echo -e "   1.4.1 Rosetta 2 Install For Apple Chip"
-            softwareupdate --install-rosetta
-            echo -e "   1.4.2 buildkit Config Check"
+            echo -e "   1.4.1 buildkit Config Check"
             if [ $(buildkit_config) = "false" ];then
-                echo -e "       ${GREEN}1.4.2.1 buildkit in $HOME/.docker/daemon.json is false - ✅ \n"
+                echo -e "       ${GREEN}1.4.1.1 buildkit in $HOME/.docker/daemon.json is false - ✅ \n"
             else
-                echo -e "       ${RED}1.4.2.1 buildkit in $HOME/.docker/daemon.json is true - ❌ \n"
+                echo -e "       ${RED}1.4.1.1 buildkit in $HOME/.docker/daemon.json is true - ❌ \n"
                 echo -e "       ${ORANGE} Change Config to true in Docker Desktop Settings ${NC}\n"
             fi
+            # Docker Desktop > 4.12.0 (85629) Does Not Require Rosetta
+            #echo -e "   1.4.2 Rosetta 2 Install For Apple Chip"
+            #softwareupdate --install-rosetta
         ;;
         "*")
             echo -e "1.4 Machine $(hostname) Chip Type is ${RED}UNSUPPORTED${NC}."

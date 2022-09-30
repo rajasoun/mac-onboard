@@ -55,5 +55,10 @@ plugins=(
 
 # source files
 source_file "$HOME/.oh-my-zsh/oh-my-zsh.sh"
-source_file "/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source_file "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [[ "$(uname -m)" == "arm64" ]]; then
+  source_file "/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  source_file "/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+else
+  source_file "/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  source_file "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi

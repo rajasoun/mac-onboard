@@ -43,7 +43,6 @@ function checkOSPackages() {
     PACKAGE_LIST=($(cat packages/brew.txt))
     LABEL=$1
     echo -e "\n🧪 Testing $LABEL"
-    check "brew" brew --version 
     brew list --version $PACKAGE_LIST[@]
     if [  $?  ];then
         echo -e "✅ $LABEL check passed.\n"
@@ -69,7 +68,7 @@ function check_vs_extensions(){
 }
 
 function e2e_test(){
-    checkOSPackages "common-os-packages"
+    check "brew" brew --version && checkOSPackages "common-os-packages"
 
     check_vs_extensions "ms-vscode-remote.remote-containers"
 

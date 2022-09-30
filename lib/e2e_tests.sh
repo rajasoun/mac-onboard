@@ -43,6 +43,7 @@ function checkOSPackages() {
     PACKAGE_LIST=($(cat packages/brew.txt))
     LABEL=$1
     echo -e "\n🧪 Testing $LABEL"
+    check "brew" brew --version 
     brew list --version $PACKAGE_LIST[@]
     if [  $?  ];then
         echo -e "✅ $LABEL check passed.\n"

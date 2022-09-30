@@ -14,7 +14,6 @@ Following Applications & Tools are setup/teardown from the automation script
    - RAM Size > 4 GB
    - VirtualBox <= 4.3.30 must not be installed as it is not compatible with Docker Desktop
    - Download Docker Desktop Binary based on Chipset Type and install in headless mode
-    - If Chipset type is Apple Silicon, install Rosetta 2
     - Check buildkit is set to false for Apple Chip in ~/.docker/daemon.json
 </details>
 

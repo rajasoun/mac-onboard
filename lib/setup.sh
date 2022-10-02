@@ -143,7 +143,6 @@ function audit_trail(){
     brew_integrity=$(brew list --version | sha256sum | awk '{print $1}')
     echo "Installed Packages Integrity: $brew_integrity" >> dotfiles/.setup
     brew list > packages/installed.txt
-    backup_copy_dotfile .setup
 }
 
 function check_drift(){
@@ -171,6 +170,7 @@ function setup(){
     install_oh_my_zsh
     install_global_node_packages
     cleanup
+    backup_copy_dotfile .setup
     audit_trail
 }
 

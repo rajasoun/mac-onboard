@@ -27,6 +27,12 @@ case ${choice} in
     "git-login")
       gh auth login --hostname $GIT --git-protocol ssh --with-token < github.token
       ;;
+    "brew-upgrade")
+      brew update
+      brew upgrade 
+      backup_copy_dotfile .setup
+      audit_trail
+      ;;
     *)
     echo "${RED}Usage: e2e.sh < setup | test | teardown >${NC}"
 cat <<-EOF
@@ -40,6 +46,7 @@ Commands:
   drift-check   -> Check Drift of the automated setup
   git-config    -> Git Configuration
   git-login     -> Git Login
+  brew-upgrade  -> Homebrew Upgrade
 EOF
     ;;
 esac

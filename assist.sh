@@ -19,11 +19,14 @@ choice=$( tr '[:upper:]' '[:lower:]' <<<"$opt" )
 case ${choice} in
     "pre-checks") pre_checks_main;;
     "setup")setup_main ;;
-    "config")git_config_main;;
     "speed-test") speed_test;;
     "test")e2e_tests_main ;;
     "teardown")teardown_main ;;
     "drift-check") check_drift ;;
+    "git-config")git_config_main;;
+    "git-login")
+      gh auth login --hostname $GIT --git-protocol ssh --with-token < github.token
+      ;;
     *)
     echo "${RED}Usage: e2e.sh < setup | test | teardown >${NC}"
 cat <<-EOF
@@ -31,11 +34,12 @@ Commands:
 ---------
   pre-checks    -> Perform Pre-requisites Checks
   setup         -> Setup Mac
-  config        -> Git Configuration
   speed-test    -> Speed Test using Docker
   test          -> Run Automated Test
   teardown      -> Teardown Dev Container
   drift-check   -> Check Drift of the automated setup
+  git-config    -> Git Configuration
+  git-login     -> Git Login
 EOF
     ;;
 esac

@@ -44,4 +44,4 @@ jobs:
       - name: MacOS Drift Check - After Setup
         shell: bash
         run: |
-            ./assist.sh check
+            ./assist.sh drift-check

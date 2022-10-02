@@ -34,7 +34,7 @@ case ${choice} in
       audit_trail
       ;;
     *)
-    echo "${RED}Usage: e2e.sh < setup | test | teardown >${NC}"
+    echo "${RED}Usage: $0 < setup | test | teardown >${NC}"
 cat <<-EOF
 Commands:
 ---------

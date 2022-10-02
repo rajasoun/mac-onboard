@@ -16,6 +16,16 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
+      - name: MacOS Pre Checks - After Setup
+        shell: bash
+        run: |
+            ./assist.sh pre-checks
+
+      - name: MacOS Speed Test using Docker - After Setup
+        shell: bash
+        run: |
+            ./assist.sh speed-test
+
       - name: MacOS Teardown
         shell: bash
         run: |
@@ -31,17 +41,4 @@ jobs:
         run: |
             ./assist.sh test
 
-      - name: MacOS Pre Checks - After Setup
-        shell: bash
-        run: |
-            ./assist.sh pre-checks
 
-      - name: MacOS Speed Test using Docker - After Setup
-        shell: bash
-        run: |
-            ./assist.sh speed-test
-
-      - name: MacOS Drift Check - After Setup
-        shell: bash
-        run: |
-            ./assist.sh drift-check

@@ -26,6 +26,7 @@ case ${choice} in
     "git-config")git_config_main;;
     "git-login")
       gh auth login --hostname $GIT --git-protocol ssh --with-token < github.token
+      gh auth status  
       ;;
     "brew-upgrade")
       brew update

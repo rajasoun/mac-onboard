@@ -89,7 +89,6 @@ function e2e_test(){
 
     check "wget" which wget
     check "devcontainer" which devcontainer
-    check "asciinema" asciinema --version
 
     #check "pre-commit" pre-commit run --all-files
     # Report result

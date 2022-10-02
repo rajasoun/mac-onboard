@@ -51,6 +51,7 @@ function check_mac_os_version(){
     else
         echo -e "${RED}\n1.1 macOS version $os_version${NC}- ❌ Condition >= 10.15\n"
     fi
+
 }
 
 # RAM Size >= 4 GB
@@ -63,30 +64,39 @@ function check_mac_ram_size(){
     fi
 }
 
+function check_mac_disk_size(){
+    disk_size_used_percentage=$(df -h | awk '$NF=="/"{printf " %d\n", $5}')
+    if [ $disk_size_used_percentage -le  60 ]; then
+        echo -e "${GREEN}1.3 Disk Usage $disk_size_used_percentage % ${NC} - ✅ Condition <= 60 %\n"
+    else
+        echo -e "${GREEN}1.3 Disk Usage $disk_size_used_percentage % ${NC} - ❌ Condition > 60 %\n"
+    fi
+}
+
 # If virtual box installed should be > 4.3.30
 function check_virtual_box_installed_version(){
     if [ command -v vboxmanage  >/dev/null 2>&1 ]; then
-        echo -e "${ORANGE}1.3 Virtual Box Installation Found - 🟠 ${NC}"
+        echo -e "${ORANGE}1.4 Virtual Box Installation Found - 🟠 ${NC}"
         vbox_version=$(vboxmanage --version)
         if [ $(version $vbox_version) -gt $(version "4.3.30") ]; then
-            echo -e "   ${GREEN}1.3.1 Virtual Box version $vbox_version${NC} - ✅ Condition > 4.3.30\n"
+            echo -e "   ${GREEN}1.4.1 Virtual Box version $vbox_version${NC} - ✅ Condition > 4.3.30\n"
         else
-            echo -e "   ${RED}1.3.1 Virtual Box version $vbox_version${NC} - ❌ Condition > 4.3.30\n"
+            echo -e "   ${RED}1.4.1 Virtual Box version $vbox_version${NC} - ❌ Condition > 4.3.30\n"
         fi
     else
-        echo -e "${GREEN}1.3 Virtual Box Installation NOT Found ${NC}\n"
+        echo -e "${GREEN}1.4 Virtual Box Installation NOT Found ${NC}\n"
     fi
 }
 
 function docker_install_prompt(){
     chip_type=$1
     if [[ $(check_command_installed "docker") = "NOT Installed" ]]; then
-        echo -e "\n1.4 Machine $(hostname) Chip Type is $chip_type"
+        echo -e "\n1.5 Machine $(hostname) Chip Type is $chip_type"
         echo -e "   Download Docker Desktop for $chip_type Chip"
         echo -e "   https://docs.docker.com/desktop/mac/install/\n"
         _prompt_confirm "   ${ORANGE}Is Docker Desktop for $chip_type Chip Installation Done - Continue ? ${NC}"
     else
-        echo -e "${GREEN}1.4 Docker Desktop for $chip_type Chip${NC} - ✅"
+        echo -e "${GREEN}1.5 Docker Desktop for $chip_type Chip${NC} - ✅"
     fi
 }
 
@@ -105,7 +115,7 @@ function check_mac_chipset(){
     case ${choice} in
         *"intel"*)
             docker_install_prompt "Intel"
-            msg="1.4.1 buildkit Config Check"
+            msg="1.5.1 buildkit Config Check"
             # In File $HOME/.docker/daemon.json
             if [ $(buildkit_config) = "true" ];then
                 echo -e "   ${GREEN}$msg - Condition buildkit=true in $HOME/.docker/daemon.json ✅${NC}\n"
@@ -116,7 +126,7 @@ function check_mac_chipset(){
         ;;
         *"apple"*)
             docker_install_prompt "Apple"
-            msg="1.4.1 buildkit Config Check"
+            msg="1.5.1 buildkit Config Check"
             if [ $(buildkit_config) = "false" ];then
                 echo -e "   ${GREEN}$msg - Condition buildkit=false in $HOME/.docker/daemon.json ✅${NC}\n"
             else
@@ -128,16 +138,18 @@ function check_mac_chipset(){
             #softwareupdate --install-rosetta
         ;;
         "*")
-            echo -e "1.4 Machine $(hostname) Chip Type is ${RED}UNSUPPORTED${NC}."
+            echo -e "1.5 Machine $(hostname) Chip Type is ${RED}UNSUPPORTED${NC}."
             echo -e "Exiting..."
             exit 1
         ;;
     esac
 }
 
+
 function prerequisite_checks(){
     check_mac_os_version
     check_mac_ram_size
+    check_mac_disk_size
     check_virtual_box_installed_version
     check_mac_chipset
 }

@@ -150,11 +150,11 @@ function check_drift(){
     brew_integrity=$(brew list --version | sha256sum | awk '{print $1}')
     if [ $(cat "${HOME}/.setup" | grep -c $brew_integrity) = 1 ];then
         echo -e "${GREEN}\nDrift Check - Passsed${NC}"
-        echo -e "   ${GREEN}No Installation(s) found outside of Automation${NC}\n"
+        echo -e "   ${GREEN}No Installation(s) found outside of Automation using Homebrew${NC}\n"
         return 0
     else
         echo -e "${RED}\nDrfit Check - Failed${NC}\n"
-        echo -e "   ${ORGANGE}Installation(s) found outside of Automation${NC}\n"
+        echo -e "   ${ORGANGE}Installation(s) found outside of Automation using Homebrew${NC}\n"
         to_be=$(cat ${PWD}/packages/installed.txt)
         current=$(brew list)
         diff <( echo $to_be ) <( echo $current )

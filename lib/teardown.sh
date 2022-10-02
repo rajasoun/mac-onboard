@@ -58,12 +58,10 @@ function backup_remove_dot_files(){
     # .zshrc and .zprofile 
     if [ -f ${HOME}/.zshrc ]; then 
         mv ${HOME}/.zshrc ${HOME}/.zshrc.backup
-        rm -fr ${HOME}/.zshrc 
     fi 
     
     if [ -f ${HOME}/.zprofile ]; then 
         mv ${HOME}/.zprofile ${HOME}/.zprofile.backup
-        rm -fr ${HOME}/.zprofile
     fi 
 }
 
@@ -104,8 +102,10 @@ function teardown(){
     backup_remove_dot_files
     
     # Remove Node packages 
-    NODE_PACKAGES=($(cat packages/node_packages.txt))
-    npm uninstall -g ${NODE_PACKAGES[@]}
+    if command -v npm >/dev/null 2>&1; then
+        NODE_PACKAGES=($(cat packages/node_packages.txt))
+        npm uninstall -g ${NODE_PACKAGES[@]}
+    fi 
 }
 
 function teardown_main(){

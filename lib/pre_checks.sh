@@ -110,7 +110,7 @@ function check_mac_chipset(){
             if [ $(buildkit_config) = "true" ];then
                 echo -e "   ${GREEN}$msg - Condition buildkit=true in $HOME/.docker/daemon.json ✅${NC}\n"
             else
-                echo -e "   ${RED}$msg - Condition buildkit=true ❌${NC}\n"
+                echo -e "   ${RED}$msg - Condition buildkit=false ❌${NC}\n"
                 echo -e "   ${ORANGE}Change Config to true in Docker Desktop Settings ${NC}\n"
             fi
         ;;
@@ -121,7 +121,7 @@ function check_mac_chipset(){
                 echo -e "   ${GREEN}$msg - Condition buildkit=false in $HOME/.docker/daemon.json ✅${NC}\n"
             else
                 echo -e "   ${RED}$msg - Condition buildkit=true in $HOME/.docker/daemon.json is true ❌${NC}\n"
-                echo -e "   ${ORANGE}Change Config to true in Docker Desktop Settings ${NC}\n"
+                echo -e "   ${ORANGE}Change Config to false in Docker Desktop Settings ${NC}\n"
             fi
             # Docker Desktop > 4.12.0 (85629) Does Not Require Rosetta
             #echo -e "   1.4.2 Rosetta 2 Install For Apple Chip"

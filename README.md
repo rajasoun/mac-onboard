@@ -1,31 +1,29 @@
 # macOS-onboard
 
-macOS Laptop setup for Developer with Docker Desktop & Applications. The primary purpose is to have a standard way of configuring a development environment that is simple, fast and completely automated.
+macOS onboard tooling for Developers.
 
-## Application & Tools Summary
+## Summary
 
-Following Applications & Tools are setup/teardown from the automation script
+Automation tooling does the following 
+1. Checks for Pre Conditions
+2. Setup, Upgrade and Teardown 
+3. End To End Automation Tests
+4. Git Configuration and Login
 
 <details>
-<summary>Containerization - Docker Desktop for Mac</summary>
+<summary>Pre Checks</summary>
 
-- Containerization - [Docker Desktop for Mac](https://docs.docker.com/desktop/mac/install/)
+- Containerization - 
    - Check macOS Version for Compatibility >=10.15
    - RAM Size > 4 GB
    - VirtualBox <= 4.3.30 must not be installed as it is not compatible with Docker Desktop
-   - Download Docker Desktop Binary based on Chipset Type and install in headless mode
-    - If Chipset type is Apple Silicon, install Rosetta 2
+   - Download [Docker Desktop for Mac](https://docs.docker.com/desktop/mac/install/) Binary based on Chipset Type and install in headless mode
     - Check buildkit is set to false for Apple Chip in ~/.docker/daemon.json
+   - [Xcode Tools](https://developer.apple.com/xcode/) 
 </details>
 
 <details>
-<summary>XCode for Mac</summary>
-
-- [Xcode Tools](https://developer.apple.com/xcode/)
-</details>
-
-<details>
-<summary>Applications & Tools</summary>
+<summary>Setup and Teardown - Apps & Tools</summary>
 
 1. Package Manager - [Homebrew](https://brew.sh/)
     - Nix Tools
@@ -49,16 +47,13 @@ Following Applications & Tools are setup/teardown from the automation script
         - [jq](https://stedolan.github.io/jq/) - sed for JSON data
     - Terminal Productivity Tools
         - [asciinema](https://asciinema.org/) - Recording terminal sessions and sharing them on the web
-1. Visual Studio Code [Extensions](https://code.visualstudio.com/docs/editor/extension-marketplace)
-   - [ms-vscode-remote.remote-containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) - [Developing inside a Container](https://code.visualstudio.com/docs/remote/containers)
+1. Editors 
+    - Visual Studio Code [Extensions](https://code.visualstudio.com/docs/editor/extension-marketplace)
+        - [ms-vscode-remote.remote-containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) - [Developing inside a Container](https://code.visualstudio.com/docs/remote/containers)
 
 </details>
 
-# Automation
-
-Automation script does following Prerequisites Checks, Setup and Tests
-
-## 1. Prerequisites Checks
+# Gedtting Started
 
 <details>
 <summary>1. Workspace </summary>
@@ -74,8 +69,8 @@ cd mac-onboard
 </details>
 
 <details>
-<summary>2. Docker Desktop for Mac</summary>
-In macOS Terminal Window, Run Prerequisites Checks for Docker Desktop Installation
+<summary>2. Prerequisites Checks</summary>
+In macOS Terminal Window, Run Prerequisites Checks 
 
 ```sh
 ./assist.sh pre-checks
@@ -91,11 +86,9 @@ In macOS Terminal Window, Run Prerequisites Checks for Docker
 ```
 </details>
 
-## 2. Setup
-
 <details>
-<summary>1. Teardown </summary>
-In macOS Terminal Window, Run following command to teardown the existing setup
+<summary>4. Teardown </summary>
+In macOS Terminal Window, Run following command to teardown the existing setup (if any)
 
 ```sh
 ./assist.sh teardown # Will remove all packages
@@ -103,7 +96,7 @@ In macOS Terminal Window, Run following command to teardown the existing setup
 </details>
 
 <details>
-<summary>2. Setup </summary>
+<summary>5. Setup </summary>
 In macOS Terminal Window, Run following commands for application installation
 
 ```sh
@@ -111,10 +104,9 @@ In macOS Terminal Window, Run following commands for application installation
 ```
 </details>
 
-## 3. Test
 <details>
-<summary>1. End To End (e2e) Tests  </summary>
-In macOS Terminal Window, Run following commands for application installation
+<summary>6. End To End (e2e) Tests  </summary>
+In macOS Terminal Window, Run following commands for application installation end to end tests
 
 ```sh
 ./assist.sh test
@@ -122,7 +114,32 @@ In macOS Terminal Window, Run following commands for application installation
 </details>
 
 <details>
-<summary>2. Sharing Test Output </summary>
+<summary>7. Git Config </summary>
+In macOS Terminal Window, Run following commands for git configuration
+
+```sh
+./assist.sh git-config
+```
+</details>
+
+<details>
+<summary>8. Git Login </summary>
+In macOS Terminal Window, Run following commands for git Login via Token
+
+```sh
+export $(grep -v '^#' env.ini | xargs)
+gh auth login --hostname $GIT --git-protocol ssh 
+```
+
+Store the token in github.token file and Validate via 
+
+```sh
+./assist.sh git-login
+```
+</details>
+
+<details>
+<summary>9. Sharing Test Output </summary>
 
 Execute using `script` command and share the log.txt
 

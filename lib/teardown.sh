@@ -85,6 +85,12 @@ function teardown(){
         echo -e "Python3 Already Uninstalled"
     fi
 
+    # Remove Node packages 
+    if command -v npm >/dev/null 2>&1; then
+        NODE_PACKAGES=($(cat packages/node_packages.txt))
+        npm uninstall -g ${NODE_PACKAGES[@]}
+    fi 
+    
     # brew
     if command -v brew >/dev/null 2>&1; then
         brew list | xargs brew uninstall --force
@@ -98,14 +104,7 @@ function teardown(){
     /bin/rm -fr $HOME/.oh-my-zsh
     /bin/rm -fr  /usr/local/share/zsh-autosuggestions
     /bin/rm -fr  /usr/local/share/zsh-syntax-highlighting
-    
     backup_remove_dot_files
-    
-    # Remove Node packages 
-    if command -v npm >/dev/null 2>&1; then
-        NODE_PACKAGES=($(cat packages/node_packages.txt))
-        npm uninstall -g ${NODE_PACKAGES[@]}
-    fi 
 }
 
 function teardown_main(){

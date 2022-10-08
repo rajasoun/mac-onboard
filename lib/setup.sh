@@ -174,6 +174,12 @@ function setup(){
     audit_trail
 }
 
+function update_audit_trail(){
+    echo "Action: Setup | Start Time: $(date)" > dotfiles/.setup
+    audit_trail
+    backup_copy_dotfile .setup
+}
+
 function setup_main(){
     echo "In Setup Main"
     start=$(date +%s)

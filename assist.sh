@@ -34,20 +34,24 @@ case ${choice} in
       backup_copy_dotfile .setup
       audit_trail
       ;;
+    "update-audit-trail")
+      update_audit_trail
+      ;;
     *)
     echo "${RED}Usage: $0 < setup | test | teardown >${NC}"
 cat <<-EOF
 Commands:
 ---------
-  pre-checks    -> Perform Pre-requisites Checks
-  setup         -> Setup Mac
-  speed-test    -> Speed Test using Docker
-  test          -> Run Automated Test
-  teardown      -> Teardown Dev Container
-  drift-check   -> Check Drift of the automated setup
-  git-config    -> Git Configuration
-  git-login     -> Git Login
-  brew-upgrade  -> Homebrew Upgrade
+  pre-checks          -> Perform Pre-requisites Checks
+  setup               -> Setup Mac
+  speed-test          -> Speed Test using Docker
+  test                -> Run Automated Test
+  teardown            -> Teardown Dev Container
+  drift-check         -> Check Drift of the automated setup
+  git-config          -> Git Configuration
+  git-login           -> Git Login
+  brew-upgrade        -> Homebrew Upgrade
+  update-audit-trail  -> Update Audit Trail 
 EOF
     ;;
 esac

@@ -66,6 +66,10 @@ function backup_remove_dot_files(){
 }
 
 function teardown(){
+    # multipass 
+    # to destroy all data, too
+    brew uninstall --zap multipass
+
     # visual studio code
     if command -v code >/dev/null 2>&1; then
         uninstall_visual_studio_code_extension

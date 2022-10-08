@@ -1,2 +1,3 @@
 aws-vault
 iterm2
+multipass

@@ -126,6 +126,16 @@ function install_global_node_packages(){
     npm install -g ${NODE_PACKAGES[@]}
 }
 
+function upgrade_pip(){
+    python3.10 -m pip install --upgrade pip
+}
+
+function install_global_python_packages(){
+    pip3 --disable-pip-version-check \
+            --no-cache-dir install --force-reinstall \
+            -r packages/requirements.txt
+}
+
 function exit_if_not_mac_os(){
     case "$(uname -s)" in
     Darwin) echo -e "${GREEN}OS: Mac OS | User: $USER | Machine: $(hostname)${NC}";;
@@ -139,13 +149,22 @@ function cleanup(){
 }
 
 function audit_trail(){
-    echo "Dot Files Intgerity: $(integrity)" >> dotfiles/.setup
+    echo "Dot Files Intgerity: $(integrity)" > dotfiles/.setup
     brew_integrity=$(brew list --version | sha256sum | awk '{print $1}')
-    echo "Installed Packages Integrity: $brew_integrity" >> dotfiles/.setup
-    brew list > packages/installed.txt
+    echo "Installed Packages (via brew) Integrity: $brew_integrity" >> dotfiles/.setup
+    pip_integrity=$(pip3 list --version | sha256sum | awk '{print $1}')
+    echo "Installed Packages (via pip3) Integrity: $pip_integrity" >> dotfiles/.setup
+    npm_integrity=$(npm list --global --json | sha256sum | awk '{print $1}')
+    echo "Installed Packages (via npm) Integrity: $npm_integrity" >> dotfiles/.setup
 }
 
-function check_drift(){
+function update_audit_trail(){
+    echo "Action: Setup | Start Time: $(date)" > dotfiles/.setup
+    audit_trail
+    backup_copy_dotfile .setup
+}
+
+function check_brew_drift(){
     brew_integrity=$(brew list --version | sha256sum | awk '{print $1}')
     if [ $(cat "${HOME}/.setup" | grep -c $brew_integrity) = 1 ];then
         echo -e "${GREEN}\nDrift Check - Passsed${NC}"
@@ -154,11 +173,40 @@ function check_drift(){
     else
         echo -e "${RED}\nDrfit Check - Failed${NC}\n"
         echo -e "   ${ORGANGE}Installation(s) found outside of Automation using Homebrew${NC}\n"
-        to_be=$(cat ${PWD}/packages/installed.txt)
-        current=$(brew list)
-        diff <( echo $to_be ) <( echo $current )
         return 1
     fi
+}
+
+function check_pip_drift(){
+    pip_integrity=$(pip list --version | sha256sum | awk '{print $1}')
+    if [ $(cat "${HOME}/.setup" | grep -c $pip_integrity) = 1 ];then
+        echo -e "${GREEN}\nDrift Check - Passsed${NC}"
+        echo -e "   ${GREEN}No Installation(s) found outside of Automation using pip3${NC}\n"
+        return 0
+    else
+        echo -e "${RED}\nDrfit Check - Failed${NC}\n"
+        echo -e "   ${ORGANGE}Installation(s) found outside of Automation using pip3${NC}\n"
+        return 1
+    fi
+}
+
+function check_npm_drift(){
+    npm_integrity=$(npm list --global --json | sha256sum | awk '{print $1}')
+    if [ $(cat "${HOME}/.setup" | grep -c $npm_integrity) = 1 ];then
+        echo -e "${GREEN}\nDrift Check - Passsed${NC}"
+        echo -e "   ${GREEN}No Installation(s) found outside of Automation using npm${NC}\n"
+        return 0
+    else
+        echo -e "${RED}\nDrfit Check - Failed${NC}\n"
+        echo -e "   ${ORGANGE}Installation(s) found outside of Automation using npm${NC}\n"
+        return 1
+    fi
+}
+
+function check_drift(){
+    check_brew_drift
+    check_pip_drift
+    check_npm_drift
 }
 
 function setup(){
@@ -169,15 +217,10 @@ function setup(){
     install_apps
     install_oh_my_zsh
     install_global_node_packages
+    install_global_python_packages
     cleanup
     backup_copy_dotfile .setup
     audit_trail
-}
-
-function update_audit_trail(){
-    echo "Action: Setup | Start Time: $(date)" > dotfiles/.setup
-    audit_trail
-    backup_copy_dotfile .setup
 }
 
 function setup_main(){

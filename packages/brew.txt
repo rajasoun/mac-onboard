@@ -12,7 +12,6 @@ go
 httpie
 wget
 node
-k3d
 kubectl
 helm
 

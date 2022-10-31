@@ -219,8 +219,7 @@ function setup(){
     install_global_node_packages
     install_global_python_packages
     cleanup
-    backup_copy_dotfile .setup
-    audit_trail
+    update_audit_trail
 }
 
 function setup_main(){

@@ -48,3 +48,8 @@ export PATH="$homebrew_prefix_default/bin:$PATH"
 # Core Utils
 export PATH="$($(which brew) --prefix coreutils)/libexec/gnubin:$PATH"
 ################################################################################################
+
+# Source Zsh Completions 
+source <(kubectl completion zsh)
+source <(helm completion zsh)
+source <(k3d completion zsh)

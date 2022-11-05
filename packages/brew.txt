@@ -14,4 +14,4 @@ wget
 node
 kubectl
 helm
-
+fetch

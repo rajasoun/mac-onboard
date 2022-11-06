@@ -52,3 +52,5 @@ export PATH="$($(which brew) --prefix coreutils)/libexec/gnubin:$PATH"
 # Source Zsh Completions 
 source <(kubectl completion zsh)
 source <(helm completion zsh)
+
+#complete -C aws_completer aws

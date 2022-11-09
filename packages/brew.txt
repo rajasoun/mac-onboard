@@ -15,3 +15,5 @@ node
 kubectl
 helm
 fetch
+burp-suite
+

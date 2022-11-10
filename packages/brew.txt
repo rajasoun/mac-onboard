@@ -16,4 +16,6 @@ kubectl
 helm
 fetch
 burp-suite
+awscli
+
 

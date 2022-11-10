@@ -90,6 +90,15 @@ function e2e_test(){
     check "wget" which wget
     check "devcontainer" which devcontainer
 
+    check "python3" python3 --version 
+    check "go" go version 
+    check "node" node --version 
+
+    check "kubectl" which kubectl 
+    check "helm" helm version 
+    check "fetch" fetch --version 
+    check "aws" aws --version 
+
     #check "pre-commit" pre-commit run --all-files
     # Report result
     reportResults

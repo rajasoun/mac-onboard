@@ -55,9 +55,10 @@ function checkOSPackages() {
 }
 
 function check_vs_extensions(){
-    pkg=${1:-ms-vscode-remote.remote-containers}
-    extensions=$(code --list-extensions | grep -c "$pkg" )
-    if [[ $extensions = 1 ]]; then
+    extensions=$(code --list-extensions)
+    pkg_extensions=$(cat packages/extensions.txt)
+    diff=$(diff <(echo $extensions) <(echo $pkg_extensions))
+    if [[ -z $diff ]]; then
         echo "✅  Visual Studio Code Extension : $pkg Passed!"
         return 0
     else
@@ -72,8 +73,7 @@ function e2e_test(){
 
     check "brew" brew --version && checkOSPackages "common-os-packages"
 
-    check_vs_extensions "golang.go"
-    check_vs_extensions "ms-vscode-remote.remote-containers"
+    check_vs_extensions 
 
     check "sudo" sudo --version | head -1
     check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]

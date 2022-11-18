@@ -1,1 +1,2 @@
+go
 ms-vscode-remote.remote-containers

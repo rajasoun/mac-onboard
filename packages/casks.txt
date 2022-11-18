@@ -1,3 +1,5 @@
 aws-vault
 iterm2
+burp-suite
+google-cloud-sdk
 

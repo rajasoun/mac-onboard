@@ -17,5 +17,6 @@ helm
 fetch
 burp-suite
 awscli
+terraform 
 
 

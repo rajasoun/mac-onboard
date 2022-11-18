@@ -72,6 +72,7 @@ function e2e_test(){
 
     check "brew" brew --version && checkOSPackages "common-os-packages"
 
+    check_vs_extensions "golang.go"
     check_vs_extensions "ms-vscode-remote.remote-containers"
 
     check "sudo" sudo --version | head -1
@@ -98,6 +99,9 @@ function e2e_test(){
     check "helm" helm version 
     check "fetch" fetch --version 
     check "aws" aws --version 
+    check "terraform" aws --version 
+    check "gcloud" gcloud --version     
+
 
     #check "pre-commit" pre-commit run --all-files
     # Report result

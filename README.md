@@ -1,5 +1,7 @@
 # macOS-onboard
 
+![build](https://github.com/rajasoun/mac-onboard/actions/workflows/pipeline.yml/badge.svg)
+
 macOS onboard tooling for Developers.
 
 ## Summary

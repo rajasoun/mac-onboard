@@ -63,5 +63,8 @@ else
   source_file "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
 
-# Visual Studio Code - CLI 
-[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/rajasoun/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/rajasoun/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/rajasoun/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/rajasoun/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

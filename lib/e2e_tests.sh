@@ -82,7 +82,11 @@ function check_pkg_installed(){
 function e2e_test(){
     check "brew" brew --version && checkOSPackages "common-os-packages"
 
-    check_vs_extensions 
+    # Test Visual Studio Extension only in Local Laptop ot in Github Action
+    # Reason: The provision to install code is available witin teh editor an dnot outside
+    if [ -z $CI ]; then 
+        check_vs_extensions 
+    fi
 
     # checks with result with first line
     check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]

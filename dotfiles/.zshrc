@@ -62,3 +62,6 @@ else
   source_file "/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
   source_file "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
+
+# Visual Studio Code - CLI 
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"

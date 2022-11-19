@@ -39,6 +39,6 @@ jobs:
       - name: MacOS Setup - Tests
         shell: bash
         run: |
-            ./assist.sh test
+            export CI=true && ./assist.sh test
 
 

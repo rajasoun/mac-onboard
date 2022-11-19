@@ -304,4 +304,6 @@ dotfiles/.setup
 log.txt
 packages/installed.txt
 github.token
+!tests.csv
+
 

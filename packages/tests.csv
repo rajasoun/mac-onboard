@@ -1,0 +1,20 @@
+Package,Command
+zsh,zsh --version
+gh,gh --version
+http,http --version
+jq,jq --version
+aws-vault,aws-vault --version
+code,code --version
+sentry-cli,sentry-cli --version
+wget,which wget
+devcontainer,which devcontainer
+python3,python3 --version 
+go,go version 
+node,node --version 
+kubectl,which kubectl 
+helm,helm version 
+fetch,fetch --version 
+aws,aws --version 
+terraform,terraform --version 
+gcloud,gcloud --version  
+code, code --version

@@ -6,12 +6,16 @@ if [ -z "$HOME" ]; then
     HOME="/root"
 fi
 
+function echoStderr(){
+    echo "$@" 1>&2
+}
+
 function check() {
     LABEL=$1
     shift
     echo -e "\n🧪 Testing $LABEL"
     if "$@"; then
-        echo "✅  Passed!"
+        echo -e "✅  Passed!"
         return 0
     else
         echoStderr "❌ $LABEL check failed."
@@ -68,41 +72,26 @@ function check_vs_extensions(){
     fi
 }
 
-function e2e_test(){
-    check "zsh" zsh --version
+function check_pkg_installed(){
+    while IFS="," read -r pkg command
+    do
+        check "$pkg" ${command[@]}
+    done < <(tail -n +2 packages/tests.csv)
+}
 
+function e2e_test(){
     check "brew" brew --version && checkOSPackages "common-os-packages"
 
     check_vs_extensions 
 
-    check "sudo" sudo --version | head -1
+    # checks with result with first line
     check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]
-    check "curl" curl --version | head -1
+    check "sudo" sudo --version | head -1
     check "netcat" netcat --version | head -1
+    check "curl" curl --version | head -1
 
-    check "gh" gh --version
-    check "http" http --version
-    check "jq" jq --version
-
-    check "aws-vault" aws-vault --version
-    check "code" code --version
-    #check "sentry-cli" sentry-cli --version
-
-    check "wget" which wget
-    check "devcontainer" which devcontainer
-
-    check "python3" python3 --version 
-    check "go" go version 
-    check "node" node --version 
-
-    check "kubectl" which kubectl 
-    check "helm" helm version 
-    check "fetch" fetch --version 
-    check "aws" aws --version 
-    check "terraform" aws --version 
-    check "gcloud" gcloud --version     
-
-
+    check_pkg_installed
+    
     #check "pre-commit" pre-commit run --all-files
     # Report result
     reportResults

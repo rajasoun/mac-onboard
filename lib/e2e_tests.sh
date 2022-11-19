@@ -90,10 +90,6 @@ function e2e_test(){
 
     # checks with result with first line
     check "oh-my-zsh" [ -d "$HOME/.oh-my-zsh" ]
-    check "sudo" sudo --version | head -1
-    check "netcat" netcat --version | head -1
-    check "curl" curl --version | head -1
-
     check_pkg_installed
     
     #check "pre-commit" pre-commit run --all-files

@@ -1,4 +1,7 @@
 Package,Command
+sudo,sudo --version 
+netcat,netcat --version 
+curl,curl --version 
 zsh,zsh --version
 gh,gh --version
 http,http --version

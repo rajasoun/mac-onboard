@@ -20,4 +20,5 @@ fetch,fetch --version
 aws,aws --version 
 terraform,terraform --version 
 gcloud,gcloud --version  
+teller,teller version
 code, code --version

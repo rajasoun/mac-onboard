@@ -18,5 +18,6 @@ fetch
 burp-suite
 awscli
 terraform 
+teller
 
 

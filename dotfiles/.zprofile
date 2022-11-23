@@ -25,9 +25,6 @@ export CPPFLAGS="-I/usr/local/opt/curl/include"
 # python@3.10
 export LDFLAGS="-L/usr/local/opt/python@3.10/lib"
 
-# go
-export PATH=$PATH:$(go env GOPATH)/bin
-
 ################################################################################################
 #openssl@3
 export PATH="/usr/local/opt/openssl@3/bin:$PATH"
@@ -50,6 +47,9 @@ export PATH="$homebrew_prefix_default/bin:$PATH"
 
 # Core Utils
 export PATH="$($(which brew) --prefix coreutils)/libexec/gnubin:$PATH"
+
+# go
+export PATH=$PATH:$(go env GOPATH)/bin
 ################################################################################################
 
 # Source Zsh Completions 

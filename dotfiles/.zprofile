@@ -25,6 +25,9 @@ export CPPFLAGS="-I/usr/local/opt/curl/include"
 # python@3.10
 export LDFLAGS="-L/usr/local/opt/python@3.10/lib"
 
+# go
+export PATH=$PATH:$(go env GOPATH)/bin
+
 ################################################################################################
 #openssl@3
 export PATH="/usr/local/opt/openssl@3/bin:$PATH"
@@ -52,5 +55,8 @@ export PATH="$($(which brew) --prefix coreutils)/libexec/gnubin:$PATH"
 # Source Zsh Completions 
 source <(kubectl completion zsh)
 source <(helm completion zsh)
+source <(awless completion zsh)
 
-#complete -C aws_completer aws
+#Auto tab complete for AWS Cli
+export PATH=usr/local/bin/aws_completer:$PATH
+autoload -Uz compinit && compinit

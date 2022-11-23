@@ -21,12 +21,6 @@ alias ssh_keygen='ssh-keygen -q -t rsa -N '' -f "$HOME/.ssh/id_rsa" -C "$USERNAM
 # Git Rename master to main
 alias git_m2m='git branch -M main && git push -u origin main'
 
-# Easily switch between AWS Profiles : https://github.com/johnnyopao/awsp
-alias awsp="source _awsp"
-
-# Easily switch between AWS Profiles : https://github.com/johnnyopao/awsp
-alias awsp="source _awsp"
-
 # Find port
 lsof_port() {
     # exits if command-line parameter absent

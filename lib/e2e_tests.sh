@@ -59,8 +59,8 @@ function checkOSPackages() {
 }
 
 function check_vs_extensions(){
-    extensions=$(code --list-extensions)
-    pkg_extensions=$(cat packages/extensions.txt)
+    extensions=$(code --list-extensions | uniq | sort)
+    pkg_extensions=$(cat packages/extensions.txt | uniq | sort)
     diff=$(diff <(echo $extensions) <(echo $pkg_extensions))
     if [[ -z $diff ]]; then
         echo "✅  Visual Studio Code Extension : $pkg Passed!"

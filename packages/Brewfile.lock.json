@@ -961,6 +961,12 @@
         "options": {
           "full_name": "google-cloud-sdk"
         }
+      },
+      "visual-studio-code": {
+        "version": "1.74.0",
+        "options": {
+          "full_name": "visual-studio-code"
+        }
       }
     }
   },

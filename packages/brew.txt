@@ -2,6 +2,7 @@ ca-certificates
 coreutils
 gh
 jq
+yq
 netcat
 openssl
 zsh

@@ -15,7 +15,6 @@ node
 kubectl
 helm
 fetch
-burp-suite
 awscli
 terraform 
 teller

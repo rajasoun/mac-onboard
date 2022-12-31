@@ -62,7 +62,7 @@ In macOS Terminal Window, Run following commands for workspace setup
 
 ```sh
 mkdir -p ${HOME}/workspace
-cd workspace
+cd ${HOME}/workspace
 git clone https://github.com/rajasoun/mac-onboard
 cd mac-onboard
 ```

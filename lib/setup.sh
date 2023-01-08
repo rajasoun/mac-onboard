@@ -96,7 +96,7 @@ function backup_copy_dotfile(){
         echo -e "${ORANGE} $FILE exists - Moving to $HOME/backup"
         mv $HOME/$FILE $HOME/backup
     fi
-    cp -i dotfiles/$FILE $HOME \
+    cp -i $BASEDIR/dotfiles/$FILE $HOME \
         && echo -e "${GREEN} $BASEDIR/dotfiles/$FILE copied to $HOME/$FILE ${NC}" \
         || echo -e "${RED} $BASEDIR/dotfiles/$FILE Does Not Exists ${NC}"
 }

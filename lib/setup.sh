@@ -148,17 +148,17 @@ function cleanup(){
 }
 
 function audit_trail(){
-    echo "Dot Files Intgerity: $(integrity)" > dotfiles/.setup
+    echo "Dot Files Intgerity: $(integrity)" > "$BASEDIR/dotfiles/.setup"
     brew_integrity=$(brew list --version | sha256sum | awk '{print $1}')
-    echo "Installed Packages (via brew) Integrity: $brew_integrity" >> dotfiles/.setup
+    echo "Installed Packages (via brew) Integrity: $brew_integrity" >> "$BASEDIR/dotfiles/.setup"
     pip_integrity=$(pip3 list --version | sha256sum | awk '{print $1}')
-    echo "Installed Packages (via pip3) Integrity: $pip_integrity" >> dotfiles/.setup
+    echo "Installed Packages (via pip3) Integrity: $pip_integrity" >> "$BASEDIR/dotfiles/.setup"
     npm_integrity=$(npm list --global --json | sha256sum | awk '{print $1}')
-    echo "Installed Packages (via npm) Integrity: $npm_integrity" >> dotfiles/.setup
+    echo "Installed Packages (via npm) Integrity: $npm_integrity" >> "$BASEDIR/dotfiles/.setup"
 }
 
 function update_audit_trail(){
-    echo "Action: Setup | Start Time: $(date)" > dotfiles/.setup
+    echo "Action: Setup | Start Time: $(date)" > "$BASEDIR/dotfiles/.setup"
     audit_trail
     backup_copy_dotfile .setup
 }
@@ -224,7 +224,7 @@ function setup(){
 function setup_main(){
     echo "In Setup Main"
     start=$(date +%s)
-    echo "Action: Setup | Start Time: $(date)" > dotfiles/.setup
+    echo "Action: Setup | Start Time: $(date)" > $"$BASEDIR/dotfiles/.setup"
     setup
     EXIT_CODE="$?"
     end=$(date +%s)

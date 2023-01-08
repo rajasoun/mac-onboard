@@ -44,7 +44,7 @@ function reportResults() {
 }
 
 function checkOSPackages() {
-    PACKAGE_LIST=($(cat packages/brew.txt))
+    PACKAGE_LIST=($(cat $BASEDIR/packages/brew.txt))
     LABEL=$1
     echo -e "\n🧪 Testing $LABEL"
     brew list --version $PACKAGE_LIST[@]
@@ -60,7 +60,7 @@ function checkOSPackages() {
 
 function check_vs_extensions(){
     extensions=$(code --list-extensions | uniq | sort)
-    pkg_extensions=$(cat packages/extensions.txt | uniq | sort)
+    pkg_extensions=$(cat $BASEDIR/packages/extensions.txt | uniq | sort)
     diff=$(diff <(echo $extensions) <(echo $pkg_extensions))
     if [[ -z $diff ]]; then
         echo "✅  Visual Studio Code Extension : $pkg Passed!"
@@ -76,7 +76,7 @@ function check_pkg_installed(){
     while IFS="," read -r pkg command
     do
         check "$pkg" ${command[@]}
-    done < <(tail -n +2 packages/tests.csv)
+    done < <(tail -n +2 $BASEDIR/packages/tests.csv)
 }
 
 function e2e_test(){

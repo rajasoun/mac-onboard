@@ -91,7 +91,7 @@ function teardown(){
 
     # Remove Node packages 
     if command -v npm >/dev/null 2>&1; then
-        NODE_PACKAGES=($(cat packages/node_packages.txt))
+        NODE_PACKAGES=($(cat $BASEDIR/packages/node_packages.txt))
         npm uninstall -g ${NODE_PACKAGES[@]}
     fi 
     

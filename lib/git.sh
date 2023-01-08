@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export $(grep -v '^#' env.ini | xargs)
+export $(grep -v '^#' $BASEDIR/env.ini | xargs)
 
 function git-config() {
   echo -e "${GREEN}${UNDERLINE}Git Configuration${NC}\n"

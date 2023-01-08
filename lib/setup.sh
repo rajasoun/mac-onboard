@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-
-PACKAGES=($(cat packages/brew.txt))
-CASKS=($(cat packages/casks.txt))
+PACKAGES=($(cat $BASEDIR/packages/brew.txt))
+CASKS=($(cat $BASEDIR/packages/casks.txt))
 
 function fix_brew_path(){
   if [[ "$(uname -m)" == "arm64" ]]; then
@@ -41,7 +40,7 @@ function install_visual_studio_code(){
     if [ ! -f "/usr/local/bin/code" ];then
         echo -e "${ORANGE} Installing Visual Studio Code"
         brew install --cask visual-studio-code
-        EXTENSIONS=$(sed -e '/^ *$/d' packages/extensions.txt)
+        EXTENSIONS=$(sed -e '/^ *$/d' $BASEDIR/packages/extensions.txt)
         echo $EXTENSIONS | xargs -L 1 code --install-extension
     else
         echo -e "${ORANGE} Visual Studio Code Alreday Installed."
@@ -122,7 +121,7 @@ function install_oh_my_zsh(){
 }
 
 function install_global_node_packages(){
-    NODE_PACKAGES=($(cat packages/node_packages.txt))
+    NODE_PACKAGES=($(cat $BASEDIR/packages/node_packages.txt))
     npm install -g ${NODE_PACKAGES[@]}
 }
 
@@ -133,7 +132,7 @@ function upgrade_pip(){
 function install_global_python_packages(){
     pip3 --disable-pip-version-check \
             --no-cache-dir install --force-reinstall \
-            -r packages/requirements.txt
+            -r $BASEDIR/packages/requirements.txt
 }
 
 function exit_if_not_mac_os(){

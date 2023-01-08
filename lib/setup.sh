@@ -97,8 +97,8 @@ function backup_copy_dotfile(){
         mv $HOME/$FILE $HOME/backup
     fi
     cp -i dotfiles/$FILE $HOME \
-        && echo -e "${GREEN} dotfiles/$FILE copied to $HOME/$FILE ${NC}" \
-        || echo -e "${RED} dotfiles/$FILE Does Not Exists ${NC}"
+        && echo -e "${GREEN} $BASEDIR/dotfiles/$FILE copied to $HOME/$FILE ${NC}" \
+        || echo -e "${RED} $BASEDIR/dotfiles/$FILE Does Not Exists ${NC}"
 }
 
 function install_oh_my_zsh(){

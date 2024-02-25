@@ -32,5 +32,13 @@ brew "wget"
 brew "fetch"
 brew "teller"
 
+# casks
+cask "aws-vault"
+cask "iterm2"
+# cask "burp-suite"
+cask "google-cloud-sdk"
+cask "visual-studio-code"
+# cask "parallels"
+
 brew "gitguardian/tap/ggshield"
 

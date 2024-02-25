@@ -19,5 +19,6 @@ fetch
 awscli
 terraform 
 teller
+gum
 
 

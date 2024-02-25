@@ -19,8 +19,6 @@ brew "helm"
 brew "ca-certificates"
 brew "openssl"
 
-
-
 # Tools
 brew "coreutils"
 brew "gh"
@@ -31,6 +29,7 @@ brew "httpie"
 brew "wget"
 brew "fetch"
 brew "teller"
+brew "gum"
 
 # casks
 cask "aws-vault"
